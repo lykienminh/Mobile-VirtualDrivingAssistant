@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/MapScreen"
+    android:layout_width="360dp"
+    android:layout_height="640dp"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="320dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_search_bar"
+        android:drawableLeft="@drawable/icon_left_arrow"
+        android:drawableRight="@drawable/icon_voice"
+        android:drawablePadding="6dp"
+        android:elevation="5dp"
+        android:fontFamily="@font/roboto"
+        android:hint="Tìm kiếm địa điểm..."
+        android:includeFontPadding="true"
+        android:paddingLeft="13dp"
+        android:paddingRight="14dp"
+        android:textColor="#000102"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="563dp"
+        android:layout_marginTop="77dp"
+        android:elevation="5dp"
+        android:orientation="vertical"
+        android:background="@drawable/background_history"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="Gần đây"
+            android:textColor="#046177"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:layout_marginTop="19dp"
+            android:paddingLeft="20dp"
+            android:background="@drawable/background_history_item"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:paddingTop="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_time"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="7dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trường Đại học Bách Khoa"
+                    android:textColor="#000102"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/roboto"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đông Hòa, Dĩ An, Bình Dương"
+                    android:textColor="#727275"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/roboto"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:paddingLeft="20dp"
+            android:background="@drawable/background_history_item"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:paddingTop="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_time"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="7dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chợ Thủ Đức"
+                    android:textColor="#000102"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/roboto"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Võ Văn Ngân, Linh Tây, Thủ Đức, Hồ Chí Minh"
+                    android:textColor="#727275"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/roboto"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:paddingLeft="20dp"
+            android:background="@drawable/background_history_item"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:paddingTop="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_time"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="7dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ký túc xá Khu A ĐH Quốc gia..."
+                    android:textColor="#000102"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/roboto"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Khu phố 6, Đông Hoà, Dĩ An, Bình Dương"
+                    android:textColor="#727275"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/roboto"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:paddingLeft="20dp"
+            android:background="@drawable/background_history_item"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:paddingTop="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_time"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="7dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nhà Văn hoá Sinh viên ĐHQG..."
+                    android:textColor="#000102"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/roboto"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quảng Trường Sáng Tạo, Đông Hoà, Dĩ An..."
+                    android:textColor="#727275"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/roboto"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="Lịch sử tìm kiếm"
+            android:textColor="#046177"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="120dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
