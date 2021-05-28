@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/bgd_rect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/homepage_bgd_rect" />
+
+    <ImageView
+        android:id="@+id/bgd_cloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/bgd_rect"
+        app:layout_constraintTop_toTopOf="@+id/bgd_rect"
+        app:srcCompat="@drawable/homepage_bgd_cloud" />
+
+    <ImageView
+        android:id="@+id/logo_kime"
+        android:layout_width="100dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="@+id/bgd_rect"
+        app:layout_constraintStart_toStartOf="@id/bgd_rect"
+        app:layout_constraintTop_toTopOf="@+id/bgd_rect"
+        app:srcCompat="@drawable/homepage_logo_kime" />
+
+    <ImageButton
+        android:id="@+id/btn_hp_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="7dp"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="@+id/btn_hp_signs"
+        app:layout_constraintTop_toBottomOf="@+id/btn_hp_signs"
+        app:srcCompat="@drawable/homepage_icon_home" />
+
+    <ImageButton
+        android:id="@+id/btn_hp_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_hp_home"
+        app:layout_constraintEnd_toStartOf="@+id/btn_hp_settings"
+        app:layout_constraintStart_toEndOf="@+id/btn_hp_home"
+        app:layout_constraintTop_toTopOf="@+id/btn_hp_home"
+        app:srcCompat="@drawable/homepage_icon_search" />
+
+    <ImageButton
+        android:id="@+id/btn_hp_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:background="@null"
+        android:onClick="openSettings"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_hp_search"
+        app:layout_constraintEnd_toEndOf="@+id/btn_hp_about"
+        app:layout_constraintTop_toTopOf="@+id/btn_hp_search"
+        app:srcCompat="@drawable/homepage_icon_settings" />
+
+    <ImageButton
+        android:id="@+id/btn_hp_maps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="30dp"
+        android:background="@null"
+        android:onClick="openMainMap"
+        app:layout_constraintStart_toStartOf="@id/bgd_rect"
+        app:layout_constraintTop_toBottomOf="@+id/logo_kime"
+        app:srcCompat="@drawable/homepage_bg_maps" />
+
+    <ImageButton
+        android:id="@+id/btn_hp_traffic"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="17dp"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="@id/bgd_rect"
+        app:layout_constraintTop_toTopOf="@+id/btn_hp_maps"
+        app:srcCompat="@drawable/homepage_bg_traffic" />
+
+    <ImageButton
+        android:id="@+id/btn_hp_signs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="@+id/btn_hp_maps"
+        app:layout_constraintTop_toBottomOf="@+id/btn_hp_maps"
+        app:srcCompat="@drawable/homepage_bg_signs" />
+
+    <ImageButton
+        android:id="@+id/btn_hp_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_hp_signs"
+        app:layout_constraintEnd_toEndOf="@+id/btn_hp_traffic"
+        app:srcCompat="@drawable/homepage_bg_about" />
+
+    <ImageView
+        android:id="@+id/hp_icon_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/str_map"
+        app:layout_constraintStart_toStartOf="@+id/str_map"
+        app:srcCompat="@drawable/homepage_icon_placeholder" />
+
+    <ImageView
+        android:id="@+id/hp_icon_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/str_traffic"
+        app:layout_constraintStart_toStartOf="@+id/str_traffic"
+        app:srcCompat="@drawable/homepage_icon_camera" />
+
+    <ImageView
+        android:id="@+id/hp_icon_ar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/str_ar"
+        app:layout_constraintStart_toStartOf="@+id/str_ar"
+        app:srcCompat="@drawable/homepage_icon_pedestrian_crossing" />
+
+    <ImageView
+        android:id="@+id/hp_icon_information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/str_about"
+        app:layout_constraintStart_toStartOf="@+id/str_about"
+        app:srcCompat="@drawable/homepage_icon_information" />
+
+    <TextView
+        android:id="@+id/str_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="Bản đồ"
+        android:textColor="#BE0000"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_hp_maps"
+        app:layout_constraintStart_toStartOf="@+id/btn_hp_maps" />
+
+    <TextView
+        android:id="@+id/str_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/roboto"
+        android:text="Giới thiệu"
+        android:textColor="#BE0000"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_hp_about"
+        app:layout_constraintStart_toStartOf="@+id/btn_hp_about" />
+
+    <TextView
+        android:id="@+id/str_traffic"
+        android:layout_width="83dp"
+        android:layout_height="41dp"
+        android:fontFamily="@font/roboto"
+        android:text="Tình trạng giao thông"
+        android:textColor="#007AAF"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_hp_traffic"
+        app:layout_constraintStart_toStartOf="@+id/btn_hp_traffic" />
+
+    <TextView
+        android:id="@+id/str_ar"
+        android:layout_width="77dp"
+        android:layout_height="39dp"
+        android:fontFamily="@font/roboto"
+        android:text="Nhận diện biển báo"
+        android:textColor="#007AAF"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_hp_signs"
+        app:layout_constraintStart_toStartOf="@+id/btn_hp_signs" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
