@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.activities.SettingsActivity">
 
     <ImageView
         android:id="@+id/bgd_circ"
@@ -165,11 +165,13 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
+
                 <ImageButton
                     android:id="@+id/btn_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:onClick="openSettingsInfo"
                     app:srcCompat="@drawable/settings_icon_info" />
 
                 <TextView
@@ -189,10 +191,11 @@
 
     <ImageButton
         android:id="@+id/btn_left_arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
+        android:layout_width="10dp"
+        android:layout_height="14dp"
         android:layout_marginStart="10dp"
+        android:background="@null"
+        android:onClick="returnHome"
         app:layout_constraintBottom_toBottomOf="@+id/str_settings"
         app:layout_constraintStart_toStartOf="@+id/bgd_rec"
         app:layout_constraintTop_toTopOf="@+id/str_settings"
@@ -212,7 +215,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/bgd_circ"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/bgd_circ"
         app:layout_constraintTop_toTopOf="@+id/bgd_circ" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

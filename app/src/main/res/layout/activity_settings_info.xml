@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.SettingsInfoActivity">
+
+    <ImageView
+        android:id="@+id/stg_info_bgd_rect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/stg_info_bgd_rect" />
+
+    <ImageView
+        android:id="@+id/stg_info_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/stg_info_bgd_rect"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="@+id/stg_info_bgd_rect"
+        app:srcCompat="@drawable/stg_info_logo_kime" />
+
+    <ImageView
+        android:id="@+id/stg_info_vector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        app:layout_constraintStart_toStartOf="@+id/stg_info_bgd_rect"
+        app:layout_constraintTop_toTopOf="@+id/stg_info_bgd_rect"
+        app:srcCompat="@drawable/stg_info_vector" />
+
+    <ImageView
+        android:id="@+id/stg_info_gif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        app:layout_constraintEnd_toEndOf="@+id/stg_info_bgd_rect"
+        app:layout_constraintStart_toStartOf="@+id/stg_info_bgd_rect"
+        app:layout_constraintTop_toTopOf="@+id/stg_info_bgd_rect"
+        app:srcCompat="@drawable/stg_info" />
+
+    <ImageButton
+        android:id="@+id/btn_left_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:background="@null"
+        android:onClick="returnHome"
+        app:layout_constraintBottom_toBottomOf="@+id/str_info"
+        app:layout_constraintStart_toStartOf="@+id/stg_info_bgd_rect"
+        app:layout_constraintTop_toTopOf="@+id/str_info"
+        app:srcCompat="@drawable/settings_icon_left_arrow" />
+
+    <TextView
+        android:id="@+id/str_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto"
+        android:text="Thông tin"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/stg_info_bgd_rect"
+        app:layout_constraintStart_toStartOf="@+id/stg_info_bgd_rect"
+        app:layout_constraintTop_toTopOf="@+id/stg_info_bgd_rect" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="Phiên bản ứng dụng: 1.0"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/stg_info_logo"
+        app:layout_constraintEnd_toEndOf="@+id/stg_info_bgd_rect"
+        app:layout_constraintStart_toStartOf="@+id/stg_info_bgd_rect"
+        app:layout_constraintTop_toBottomOf="@+id/stg_info_vector" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/roboto"
+        android:text="Liên hệ: contact.VDA@kime.vn"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:fontFamily="@font/roboto"
+        android:text="Drive safely, live happily"
+        android:textColor="#222222"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="@+id/stg_info_logo"
+        app:layout_constraintStart_toStartOf="@+id/stg_info_logo"
+        app:layout_constraintTop_toBottomOf="@+id/stg_info_logo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout >
