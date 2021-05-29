@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "5158108309",
+    "project_id": "driving-assistant-3781f",
+    "storage_bucket": "driving-assistant-3781f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5158108309:android:f13af60b68be68ef87af9c",
+        "android_client_info": {
+          "package_name": "com.drivingassistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5158108309-uah7op8phouve51njsev6bmngkhtoobc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBY3OEVHYfC4lg58ZzitPwK3tda0M7khfo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "5158108309-uah7op8phouve51njsev6bmngkhtoobc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

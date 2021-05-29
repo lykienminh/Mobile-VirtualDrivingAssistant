@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.activities.SettingsActivity">
 
     <ImageView
         android:id="@+id/bgd_circ"
@@ -189,10 +189,11 @@
 
     <ImageButton
         android:id="@+id/btn_left_arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
+        android:layout_width="10dp"
+        android:layout_height="14dp"
         android:layout_marginStart="10dp"
+        android:background="@null"
+        android:onClick="returnHome"
         app:layout_constraintBottom_toBottomOf="@+id/str_settings"
         app:layout_constraintStart_toStartOf="@+id/bgd_rec"
         app:layout_constraintTop_toTopOf="@+id/str_settings"

@@ -1,5 +1,13 @@
 <resources>
-    <string name="app_name">Kime</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Driving Assistant</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="map_key" templateMergeStrategy="preserve" translatable="false">
+        AIzaSyCwGl6aXKJfu6iloKvg_JrJPGfJbJMs61A
+    </string>
+    <string name="description_info">Info</string>
+    <string name="request_permission">This sample needs camera permission.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="gps_disabled">GPS disabled</string>
+    <string name="please_enable_gps">In order to get current speed the GPS must be enabled.</string>
+    <string name="waiting_for_fix">Waiting for GPS fix</string>
 </resources>

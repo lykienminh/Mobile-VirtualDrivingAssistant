@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.activities.MainActivity">
 
 
     <ImageView
@@ -40,6 +40,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="7dp"
         android:background="@null"
+        android:onClick="returnHome"
         app:layout_constraintStart_toStartOf="@+id/btn_hp_signs"
         app:layout_constraintTop_toBottomOf="@+id/btn_hp_signs"
         app:srcCompat="@drawable/homepage_icon_home" />
@@ -71,10 +72,10 @@
         android:id="@+id/btn_hp_maps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
         android:background="@null"
-        android:onClick="openMainMap"
+        android:onClick="openMap"
         app:layout_constraintStart_toStartOf="@id/bgd_rect"
         app:layout_constraintTop_toBottomOf="@+id/logo_kime"
         app:srcCompat="@drawable/homepage_bg_maps" />
@@ -94,6 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
+        android:onClick="openSignDetect"
         app:layout_constraintStart_toStartOf="@+id/btn_hp_maps"
         app:layout_constraintTop_toBottomOf="@+id/btn_hp_maps"
         app:srcCompat="@drawable/homepage_bg_signs" />
@@ -139,8 +141,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
-        app:layout_constraintBottom_toTopOf="@+id/str_about"
-        app:layout_constraintStart_toStartOf="@+id/str_about"
+        app:layout_constraintBottom_toTopOf="@+id/str_speed"
+        app:layout_constraintStart_toStartOf="@+id/str_speed"
         app:srcCompat="@drawable/homepage_icon_information" />
 
     <TextView
@@ -158,7 +160,7 @@
         app:layout_constraintStart_toStartOf="@+id/btn_hp_maps" />
 
     <TextView
-        android:id="@+id/str_about"
+        android:id="@+id/str_speed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
