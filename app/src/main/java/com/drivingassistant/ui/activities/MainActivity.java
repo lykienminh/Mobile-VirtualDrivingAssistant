@@ -39,4 +39,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DetectorActivity.class);
         startActivity(intent);
     }
+
+    public void openAboutUs(View view) {
+        Intent intent = new Intent(this, AboutUsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openTraffic(View view) {
+        Intent intent = new Intent(this, TrafficActivity.class);
+        startActivity(intent);
+    }
 }
