@@ -86,6 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="17dp"
         android:background="@null"
+        android:onClick="openTraffic"
         app:layout_constraintEnd_toEndOf="@id/bgd_rect"
         app:layout_constraintTop_toTopOf="@+id/btn_hp_maps"
         app:srcCompat="@drawable/homepage_bg_traffic" />
@@ -105,6 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
+        android:onClick="openAboutUs"
         app:layout_constraintBottom_toBottomOf="@+id/btn_hp_signs"
         app:layout_constraintEnd_toEndOf="@+id/btn_hp_traffic"
         app:srcCompat="@drawable/homepage_bg_about" />
