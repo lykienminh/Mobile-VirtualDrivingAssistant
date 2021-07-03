@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.SettingsActivity">
 
+
     <ImageView
         android:id="@+id/bgd_circ"
         android:layout_width="wrap_content"

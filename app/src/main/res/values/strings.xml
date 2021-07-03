@@ -2,7 +2,7 @@
     <string name="app_name">Driving Assistant</string>
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="map_key" templateMergeStrategy="preserve" translatable="false">
-        AIzaSyCwGl6aXKJfu6iloKvg_JrJPGfJbJMs61A
+        AIzaSyCrO7kgh1q6qVCRkAH2GPpjYWnnLXxsK2U
     </string>
     <string name="description_info" translatable="false">Info</string>
     <string name="request_permission" translatable="false">This sample needs camera permission.</string>
@@ -17,6 +17,10 @@
     <string name="stg_navigation">Navigation</string>
     <string name="stg_storage">Storage</string>
     <string name="stg_info">Info</string>
-
+    <string name="search_view">Search here…</string>
+    <string name="restaurant_icon">Restaurants</string>
+    <string name="hotel_icon">Hotels</string>
+    <string name="coffee_icon">Coffee</string>
+    <string name="more_icon">More</string>
 
 </resources>

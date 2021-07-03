@@ -1,7 +1,6 @@
 package com.drivingassistant.ui.activities;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -11,8 +10,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.drivingassistant.R;
-import com.drivingassistant.ui.activities.JSONParser;
-
+import com.drivingassistant.parser.FetchURL;
+import com.drivingassistant.parser.TaskLoadedCallback;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,15 +22,24 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 import androidx.annotation.NonNull;
+//import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.util.Log;
-
 import android.view.View;
+
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 
@@ -44,18 +52,23 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+//
 
-public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapActivity extends FragmentActivity implements OnMapReadyCallback, TaskLoadedCallback {
     GoogleMap map;
     SupportMapFragment mapFragment;
     SearchView searchView;
     Marker marker;
     FusedLocationProviderClient fusedLocationProviderClient;
-    ImageButton btn_restaurant, btn_traffic_mode, btn_gps;
-    double currentLat = 0, currentLong = 0;
+    ImageButton btn_traffic_mode, btn_gps, btn_direction;
+    Button btn_restaurant;
+    LatLng place1, place2;
+    Polyline currentPolyline;
 
+    double currentLat = 0, currentLong = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,8 +78,109 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        //Initialize fused location
+        // Initialize fused location
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
+        btn_restaurant = (Button) findViewById(R.id.btn_restaurant);
+        btn_restaurant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Initialize url
+                String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json" + // Url
+                        "?location=" + currentLat + "," + currentLong + // Location latitude and longtitude
+                        "&radius=5000" + // Nearby radius
+                        "&types=restaurant" + // Place type
+                        "&sensor=true" + // Sensor
+                        "&key=" + getResources().getString(R.string.map_key); // Google map key
+
+                Log.wtf("khang", url);
+                // Execute place task method to download json data
+                new PlaceTask().execute(url);
+            }
+        });
+
+        btn_traffic_mode = (ImageButton) findViewById(R.id.btn_traffic_mode);
+        btn_traffic_mode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isTrafficEnabled(map))
+                    setTrafficEnabled(map, false);
+                else
+                    setTrafficEnabled(map, true);
+            }
+        });
+
+        btn_gps = (ImageButton) findViewById(R.id.btn_gps);
+        btn_gps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getCurrentLocation();
+            }
+        });
+
+        // Initialize places
+        Places.initialize(getApplicationContext(), "AIzaSyCrO7kgh1q6qVCRkAH2GPpjYWnnLXxsK2U");
+
+        searchView = (SearchView) findViewById(R.id.sv_location);
+        // Set searchView non focusable
+        searchView.setFocusable(false);
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Initialize place field list
+                List<Place.Field> fieldList = Arrays.asList(Place.Field.ADDRESS,
+                        Place.Field.LAT_LNG, Place.Field.NAME);
+                // Create intent
+                Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY,
+                        fieldList).build(MapActivity.this);
+                // Start activity result
+                startActivityForResult(intent, 100);
+            }
+        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                String location = searchView.getQuery().toString();
+                List<Address> addressList = null;
+                if (location != null || !location.equals("")) {
+                    Geocoder geocoder = new Geocoder(MapActivity.this);
+                    try {
+                        addressList = geocoder.getFromLocationName(location, 1);
+                        while (addressList == null) {
+                            addressList = geocoder.getFromLocationName(location, 1);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    if (addressList != null) {
+                        Address address = addressList.get(0);
+                        place2 = new LatLng(address.getLatitude(), address.getLongitude());
+                        if (marker != null) marker.remove();
+                        marker = map.addMarker(new MarkerOptions().position(place2).title(location));
+                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(place2, 70));
+                    }
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        btn_direction = (ImageButton) findViewById(R.id.btn_direction);
+        btn_direction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Initialize url
+                String url = getUrl(place1, place2, "driving");
+                Log.wtf("khang", url);
+                // Execute place task method to download json data
+                new FetchURL(MapActivity.this).execute(url, "driving");
+            }
+        });
+
     }
 
     public final boolean isTrafficEnabled(GoogleMap googleMap) {
@@ -79,150 +193,107 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        map = googleMap;
         getCurrentLocation();
-
-        // set traffic mode
-        btn_traffic_mode = (ImageButton) findViewById(R.id.btn_traffic_mode);
-
-        btn_traffic_mode.setOnClickListener(v -> {
-            if (isTrafficEnabled(map))
-                setTrafficEnabled(map, false);
-            else
-                setTrafficEnabled(map, true);
-        });
-
-        // get nearby restaurant
-        btn_restaurant = (ImageButton) findViewById(R.id.btn_restaurant);
-
-        btn_restaurant.setOnClickListener(v -> {
-            // Initialize url
-            String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json" + // Url
-                    "?location=" + currentLat + "," + currentLong + // Location latitude and longtitude
-                    "&radius=5000" + // Nearby radius
-                    "&types=restaurant" + // Place type
-                    "&sensor=true" + // Sensor
-                    "&key=" + getResources().getString(R.string.map_key); // Google map key
-
-            Log.wtf("khang", url);
-            // Execute place task method to download json data
-            new PlaceTask().execute(url);
-        });
-
-        // get current location
-        btn_gps = (ImageButton) findViewById(R.id.btn_gps);
-
-        btn_gps.setOnClickListener(v -> getCurrentLocation());
-
-        // search places
-        searchView = (SearchView) findViewById(R.id.search_place);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                String location = searchView.getQuery().toString();
-                if (location != null || !location.equals("")) {
-                    Geocoder geocoder = new Geocoder(MapActivity.this);
-                    List<Address> addressList = null;
-                    try {
-                        addressList = geocoder.getFromLocationName(location, 1);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    if (addressList != null) {
-                        Address address = addressList.get(0);
-                        LatLng position = new LatLng(address.getLatitude(), address.getLongitude());
-                        if (marker != null) marker.remove();
-                        marker = map.addMarker(new MarkerOptions().position(position).title(location));
-                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 10));
-                    }
-                }
-                return true;
-            }
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-
     }
 
     private void getCurrentLocation() {
         // Initialize task location
-        if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // When permission denied, request permission
             ActivityCompat.requestPermissions(MapActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
             // here to request the missing permissions, and then overriding
-            // public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+        Task<Location> task = fusedLocationProviderClient.getLastLocation();
+        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                // When success
+                if (location != null){
 
-        fusedLocationProviderClient.getLastLocation()
-                .addOnSuccessListener(new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // When success
-                        if (location != null){
+                    Log.wtf("khang", "I'm here.");
+                    mapFragment.getMapAsync(new OnMapReadyCallback() {
+                        @Override
+                        public void onMapReady(GoogleMap googleMap) {
+                            map = googleMap;
+                            // Initialize lat lng
                             currentLat = location.getLatitude();
                             currentLong = location.getLongitude();
-                            mapFragment.getMapAsync(new OnMapReadyCallback() {
-                                @Override
-                                public void onMapReady(GoogleMap googleMap) {
-                                    map = googleMap;
-                                    // Initialize lat lng
-                                    LatLng latLng = new LatLng(currentLat, currentLong);
-                                    // Create marker options
-                                    MarkerOptions options = new MarkerOptions().position(latLng)
-                                            .title("I'm there")
-                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location));
-                                    // Zoom map
-                                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
-                                    // Add marker on map
-                                    map.addMarker(options);
-                                }
-                            });
+                            Log.wtf("khang", String.valueOf(currentLat));
+                            Log.wtf("khang", String.valueOf(currentLong));
+                            place1 = new LatLng(currentLat, currentLong);
+
+                            // Create marker options
+                            MarkerOptions options = new MarkerOptions().position(place1)
+                                    .title("I'm there")
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location));
+
+                            // Zoom map
+                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(place1, 15));
+
+                            // Add marker on map
+                            map.addMarker(options);
+
+                            map.getUiSettings().setZoomControlsEnabled(true);
+                            map.getUiSettings().setMyLocationButtonEnabled(true);
                         }
-                    }
-                });
+                    });
+                }
+            }
+        });
     }
 
-    @SuppressLint("MissingSuperCall")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 44){
-            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 44) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // When permission grated, call method
                 getCurrentLocation();
             }
         }
     }
 
-    public void returnHome(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    private String getUrl(LatLng origin, LatLng dest, String directionMode){
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
+        // Destination of route
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
+        // Mode
+        String mode = "mode=" + directionMode;
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + mode;
+        // Output format
+        String output = "json";
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + //
+                "?" + parameters + "&key=" + getResources().getString(R.string.map_key);
+        return url;
     }
 
-    public void openService(View view) {
-        Intent intent = new Intent(this, ServiceActivity.class);
-        startActivity(intent);
+    @Override
+    public void onTaskDone(Object... values) {
+        if (currentPolyline != null)
+            currentPolyline.remove();
+        currentPolyline = map.addPolyline((PolylineOptions) values[0]);
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(place2, 12));
     }
+
 
     private class PlaceTask extends AsyncTask<String, Integer, String> {
         @Override
         protected String doInBackground(String... strings) {
             // Initialize data
             String data = null;
+            // Initialize ''data''
             try {
-                // Initialize data
                 data = downloadUrl(strings[0]);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -296,20 +367,17 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 e.printStackTrace();
             }
 
-            // Return map list
             return mapList;
         }
 
         @Override
         protected void onPostExecute(List<HashMap<String, String>> hashMaps) {
-            // Clear map
-            map.clear();
 
             // Use for loop
             for (int i = 0; i < hashMaps.size(); i++){
                 // Initialize hash map
                 HashMap<String, String> hashMapList = hashMaps.get(i);
-
+                Log.wtf("khang", hashMapList.toString());
                 // Get latitude
                 double lat = Double.parseDouble(hashMapList.get("lat"));
 
@@ -333,6 +401,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
                 // Add marker on map
                 map.addMarker(options);
+
+
             }
         }
     }
