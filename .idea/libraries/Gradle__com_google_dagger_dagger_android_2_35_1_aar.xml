@@ -5,7 +5,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d3178cad056d3cd06870598b71cb9c8e/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d3178cad056d3cd06870598b71cb9c8e/AndroidManifest.xml" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger-android/2.35.1/fc1b43264657e94e5eb7e74fba87d21e30985ae/dagger-android-2.35.1-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger-android/2.35.1/980de922ed80f04864a433500f723100c2c8050b/dagger-android-2.35.1-sources.jar!/" />
     </SOURCES>

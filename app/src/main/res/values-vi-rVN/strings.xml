@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hỗ trợ lái xe</string>
+    <string name="stg_settings">Cài đặt</string>
+    <string name="stg_map">Bản đồ</string>
+    <string name="stg_language">Ngôn ngữ</string>
+    <string name="stg_noti">Thông báo và âm thanh</string>
+    <string name="stg_navigation">Điều hướng</string>
+    <string name="stg_storage">Dữ liệu</string>
+    <string name="stg_info">Thông tin</string>
+</resources>

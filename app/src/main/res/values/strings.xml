@@ -1,13 +1,22 @@
 <resources>
     <string name="app_name">Driving Assistant</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="map_key" templateMergeStrategy="preserve" translatable="false">
         AIzaSyCwGl6aXKJfu6iloKvg_JrJPGfJbJMs61A
     </string>
-    <string name="description_info">Info</string>
-    <string name="request_permission">This sample needs camera permission.</string>
-    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
-    <string name="gps_disabled">GPS disabled</string>
-    <string name="please_enable_gps">In order to get current speed the GPS must be enabled.</string>
-    <string name="waiting_for_fix">Waiting for GPS fix</string>
+    <string name="description_info" translatable="false">Info</string>
+    <string name="request_permission" translatable="false">This sample needs camera permission.</string>
+    <string name="camera_error" translatable="false">This device doesn\'t support Camera2 API.</string>
+    <string name="gps_disabled" translatable="false">GPS disabled</string>
+    <string name="please_enable_gps" translatable="false">In order to get current speed the GPS must be enabled.</string>
+    <string name="waiting_for_fix" translatable="false">Waiting for GPS fix</string>
+    <string name="stg_settings">Settings</string>
+    <string name="stg_map">Map</string>
+    <string name="stg_language">Language</string>
+    <string name="stg_noti">Notifications and sound</string>
+    <string name="stg_navigation">Navigation</string>
+    <string name="stg_storage">Storage</string>
+    <string name="stg_info">Info</string>
+
+
 </resources>
