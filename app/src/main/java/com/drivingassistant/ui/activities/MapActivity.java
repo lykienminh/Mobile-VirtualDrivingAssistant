@@ -42,6 +42,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -146,18 +147,18 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                     Geocoder geocoder = new Geocoder(MapActivity.this);
                     try {
                         addressList = geocoder.getFromLocationName(location, 1);
-                        while (addressList == null) {
-                            addressList = geocoder.getFromLocationName(location, 1);
-                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    if (addressList != null) {
+                    if (addressList.size() > 0) {
                         Address address = addressList.get(0);
                         place2 = new LatLng(address.getLatitude(), address.getLongitude());
                         if (marker != null) marker.remove();
                         marker = map.addMarker(new MarkerOptions().position(place2).title(location));
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(place2, 70));
+                    }
+                    else{
+                        Toast.makeText(MapActivity.this, "No results found on Kime Maps.", Toast.LENGTH_SHORT).show();
                     }
                 }
                 return true;
@@ -183,6 +184,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     }
 
+    // Traffic mode
     public final boolean isTrafficEnabled(GoogleMap googleMap) {
         return googleMap.isTrafficEnabled();
 
@@ -191,6 +193,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         googleMap.setTrafficEnabled(enabled);
     }
 
+    // Map mode
     @Override
     public void onMapReady(GoogleMap googleMap) {
         getCurrentLocation();
@@ -226,8 +229,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                             // Initialize lat lng
                             currentLat = location.getLatitude();
                             currentLong = location.getLongitude();
-                            Log.wtf("khang", String.valueOf(currentLat));
-                            Log.wtf("khang", String.valueOf(currentLong));
                             place1 = new LatLng(currentLat, currentLong);
 
                             // Create marker options
@@ -240,7 +241,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
                             // Add marker on map
                             map.addMarker(options);
-
                             map.getUiSettings().setZoomControlsEnabled(true);
                             map.getUiSettings().setMyLocationButtonEnabled(true);
                         }
@@ -261,6 +261,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         }
     }
 
+    // Google Direction API
     private String getUrl(LatLng origin, LatLng dest, String directionMode){
         // Origin of route
         String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
@@ -286,7 +287,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(place2, 12));
     }
 
-
+    // Google Places API
     private class PlaceTask extends AsyncTask<String, Integer, String> {
         @Override
         protected String doInBackground(String... strings) {
@@ -341,13 +342,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         // Close reader
         reader.close();
 
+        Log.wtf("search_near_by", data);
         // Return data
         return data;
     }
 
     private class ParserTask extends AsyncTask<String, Integer, List<HashMap<String, String>>> {
-
-
         @Override
         protected List<HashMap<String, String>> doInBackground(String... strings) {
             // Create JSON parser class
@@ -401,8 +401,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
                 // Add marker on map
                 map.addMarker(options);
-
-
             }
         }
     }
