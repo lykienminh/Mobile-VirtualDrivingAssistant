@@ -20,7 +20,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6"
+        android:layout_weight="0.5"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="0dp"
             android:fontFamily="@font/roboto"
             android:text="0"
             android:textColor="@color/cod_gray"
@@ -58,7 +58,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +95,7 @@
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
-                    android:text="Khoảng cách\nhiện tại"
+                    android:text="@string/current_distance"
                     android:textColor="@color/dove_gray"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -135,7 +135,7 @@
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
-                    android:text="Tổng\nquãng đường"
+                    android:text="@string/total_distance"
                     android:textColor="@color/dove_gray"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -152,13 +152,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.7"
+        android:layout_weight="0.6"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Biển báo nhận diện được"
+            android:text="@string/sign_detected"
             android:fontFamily="@font/roboto"
             android:textSize="18sp"
             android:textColor="@color/black"
@@ -169,11 +169,11 @@
             android:id="@+id/signRecycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="80dp"
             android:layout_weight="1"
             android:clipToPadding="false"
             android:paddingTop="15dp"
-            android:layout_marginBottom="80dp"
-            android:paddingBottom="38dp"/>
+            android:paddingBottom="38dp" />
 
         <LinearLayout
             android:layout_width="match_parent"

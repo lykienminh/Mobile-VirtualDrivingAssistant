@@ -10,6 +10,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/872423363ac666d1e8448628b4fec4cb/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/872423363ac666d1e8448628b4fec4cb/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/872423363ac666d1e8448628b4fec4cb/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/095e6b2febb72175ffbf0322a52243bf/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/095e6b2febb72175ffbf0322a52243bf/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/095e6b2febb72175ffbf0322a52243bf/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-maps/17.0.1/15354d5fa6dd7661cf467ef236a13b43f5e3fb21/play-services-maps-17.0.1-javadoc.jar!/" />

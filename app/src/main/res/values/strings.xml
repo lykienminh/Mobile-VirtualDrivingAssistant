@@ -22,6 +22,20 @@
     <string name="hotel_icon">Hotels</string>
     <string name="coffee_icon">Coffee</string>
     <string name="more_icon">More</string>
+    <string name="current_distance">Current\ndistance</string>
+    <string name="total_distance">Total\ndistance</string>
+    <string name="sign_detected">Detected signs</string>
+    <string name="inference_time">Inference time</string>
+    <string name="satellite">Satellite</string>
+    <string name="gps_status">GPS status</string>
+    <string name="gps_accuracy">GPS accuracy</string>
+    <string name="threads">Threads</string>
+    <string name="confidence">Confidence</string>
+    <string name="sign_noti">Notification</string>
+    <string name="btn_next" translatable="false">Next</string>
+    <string name="history_time">Recording time</string>
+    <string name="history_location">Location</string>
+    <string name="history_speed">Speed</string>
     <string name="email">Email</string>
     <string name="name">Name</string>
     <string name="password">Password</string>

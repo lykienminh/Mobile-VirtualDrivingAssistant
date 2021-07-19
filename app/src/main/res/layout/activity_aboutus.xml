@@ -8,38 +8,11 @@
     android:background="@drawable/bg_aboutus"
     tools:context=".ui.activities.AboutUsActivity">
 
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:rowCount="1"
-        android:columnCount="2">
-
-        <ImageButton
-            android:id="@+id/btn_left_arrow"
-            android:layout_width="10dp"
-            android:background="@null"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="32dp"
-            android:onClick="returnHome"
-            app:srcCompat="@drawable/ic_left_arrow" />
-
-        <TextView
-            android:id="@+id/str_aboutus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="90dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/roboto"
-            android:text="Giới thiệu"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-    </GridLayout>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
         android:src="@drawable/img_city"
         android:layout_gravity="center"/>
 
@@ -64,14 +37,13 @@
         android:textAlignment="center"
         android:text="Lorem ipsum dolor sit amet, cu usu velit\n
 civibus, cu augue paulo senserit usu. Eius\n
-facilis nostrum et cum, vix ut porro nobis\n
-posidonium, animal tacimates usu at."/>
+facilis nostrum et cum."/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/logo_transparent"/>
 
     <TextView
@@ -84,5 +56,17 @@ posidonium, animal tacimates usu at."/>
         android:textAlignment="center"
         android:text="Drive safely, live happily"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/btn_next"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        android:textColor="#0A58ED"
+        android:background="#fff"
+        android:layout_gravity="center"
+        android:onClick="toLogin">
+    </Button>
 
 </LinearLayout>

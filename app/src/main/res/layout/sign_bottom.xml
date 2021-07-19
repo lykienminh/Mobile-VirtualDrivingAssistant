@@ -20,7 +20,7 @@
         android:layout_marginRight="20dp"
         android:orientation="vertical"
         android:paddingTop="10dp"
-        android:paddingBottom="20dp">
+        android:paddingBottom="10dp">
 
         <ImageView
             android:id="@+id/bottom_sheet_arrow"
@@ -101,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Thời gian truy vấn"
+                    android:text="@string/inference_time"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Vệ tinh"
+                    android:text="@string/satellite"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -147,7 +147,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Trạng thái GPS"
+                    android:text="@string/gps_status"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -170,7 +170,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Độ chính xác GPS"
+                    android:text="@string/gps_accuracy"
                     android:textColor="@android:color/black" />
 
                 <TextView
@@ -201,7 +201,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Số luồng thực thi"
+                    android:text="@string/threads"
                     android:textColor="@android:color/black" />
 
                 <LinearLayout
@@ -247,7 +247,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Độ tin cậy"
+                    android:text="@string/confidence"
                     android:textColor="@color/black" />
 
                 <SeekBar
@@ -330,7 +330,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Thông báo"
+                    android:text="@string/sign_noti"
                     android:textColor="@android:color/black" />
 
                 <androidx.appcompat.widget.SwitchCompat
