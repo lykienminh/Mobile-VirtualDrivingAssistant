@@ -25,11 +25,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-/*    public void openSpeedo(View view){
-        Intent intent = new Intent(this, SpeedoActivity.class);
-        startActivity(intent);
-    }*/
-
     public void returnHome(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -40,13 +35,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openAboutUs(View view) {
-        Intent intent = new Intent(this, AboutUsActivity.class);
-        startActivity(intent);
-    }
-
-    public void openTraffic(View view) {
-        Intent intent = new Intent(this, TrafficActivity.class);
+    public void openHistory(View view) {
+        Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
     }
 }

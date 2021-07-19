@@ -30,20 +30,20 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".ui.activities.MainActivity">
+        <activity android:name=".ui.activities.AboutUsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.activities.MainActivity"/>
         <activity android:name=".ui.activities.SettingsActivity"/>
         <activity android:name=".ui.activities.MapActivity" />
         <activity android:name=".ui.activities.ServiceActivity"/>
         <activity android:name=".ui.activities.CameraActivity"/>
         <activity android:name=".ui.activities.DetectorActivity"/>
-        <activity android:name=".ui.activities.AboutUsActivity"/>
-        <activity android:name=".ui.activities.TrafficActivity"/>
+        <activity android:name=".ui.activities.HistoryActivity"/>
     </application>
 
 </manifest>
