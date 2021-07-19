@@ -15,4 +15,7 @@
     <color name="cod_gray">#1C1C1C</color>
     <color name="dove_gray">#707070</color>
     <color name="porcelain">#ECEFF1</color>
+    <color name="textPrimary">#212121</color>
+    <color name="textSecondary">#757575</color>
+    <color name="myTextColor">#AFAFAF</color>
 </resources>

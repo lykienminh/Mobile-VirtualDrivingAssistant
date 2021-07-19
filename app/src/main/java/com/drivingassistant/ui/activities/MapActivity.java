@@ -12,6 +12,7 @@ import android.os.Bundle;
 import com.drivingassistant.R;
 import com.drivingassistant.parser.FetchURL;
 import com.drivingassistant.parser.TaskLoadedCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,10 +30,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 import androidx.annotation.NonNull;
 //import androidx.appcompat.widget.SearchView;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -69,6 +72,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     LatLng place1, place2;
     Polyline currentPolyline;
 
+
     double currentLat = 0, currentLong = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+
         mapFragment.getMapAsync(this);
 
         // Initialize fused location
@@ -86,17 +91,17 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         btn_restaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Initialize url
-                String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json" + // Url
-                        "?location=" + currentLat + "," + currentLong + // Location latitude and longtitude
-                        "&radius=5000" + // Nearby radius
-                        "&types=restaurant" + // Place type
-                        "&sensor=true" + // Sensor
-                        "&key=" + getResources().getString(R.string.map_key); // Google map key
+            // Initialize url
+            String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json" + // Url
+                    "?location=" + currentLat + "," + currentLong + // Location latitude and longtitude
+                    "&radius=5000" + // Nearby radius
+                    "&types=restaurant" + // Place type
+                    "&sensor=true" + // Sensor
+                    "&key=" + getResources().getString(R.string.map_key); // Google map key
 
-                Log.wtf("khang", url);
-                // Execute place task method to download json data
-                new PlaceTask().execute(url);
+            Log.wtf("khang", url);
+            // Execute place task method to download json data
+            new PlaceTask().execute(url);
             }
         });
 
@@ -182,6 +187,27 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == RESULT_OK){
+            // When success
+            // Initialize place
+            Place place = Autocomplete.getPlaceFromIntent(data);
+            // Set address on SearchView
+            Log.wtf("search_view", place.getAddress());
+            searchView.setQuery(place.getAddress(), false);
+        }
+        else if (resultCode == AutocompleteActivity.RESULT_ERROR){
+            // When error
+            // Initialize status
+            Status status = Autocomplete.getStatusFromIntent(data);
+            // Display result
+            Log.wtf("search_view", status.getStatusMessage());
+            Toast.makeText(MapActivity.this, status.getStatusMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     // Traffic mode
@@ -284,7 +310,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         if (currentPolyline != null)
             currentPolyline.remove();
         currentPolyline = map.addPolyline((PolylineOptions) values[0]);
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(place2, 12));
+        LatLng center = new LatLng((place1.latitude + place2.latitude) / 2,
+                (place1.longitude + place2.longitude) / 2);
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(center, 8));
     }
 
     // Google Places API
