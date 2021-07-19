@@ -1,98 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/AppTheme"
-    tools:context=".ui.activities.MapActivity">
+    tools:context=".ui.activities.MapActivity"
+    android:theme="@style/AppTheme">
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
-    <SearchView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/sv_location"
-        android:elevation="5dp"
-        android:fontFamily="@font/roboto"
-        android:queryHint="@string/search_view"
-        android:iconifiedByDefault="false"
-        android:textSize="15sp"
-        android:layout_margin="15dp"
-        android:background="@drawable/background_search_bar">
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/textView"
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sv_location"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto"
+            android:queryHint="@string/search_view"
+            android:iconifiedByDefault="false"
+            android:textSize="15sp"
+            android:layout_margin="15dp"
+            android:background="@drawable/background_search_bar">
+        </SearchView>
+
+        <HorizontalScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView" />
-    </SearchView>
+            android:fillViewport="true" >
 
-    <HorizontalScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fillViewport="true" >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                tools:ignore="RtlSymmetry">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:orientation="horizontal"
-            android:paddingStart="20dp"
-            tools:ignore="RtlSymmetry">
+                <Button
+                    android:id="@+id/btn_restaurant"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="@dimen/icon_margin"
+                    android:background="@drawable/map_icon_background"
+                    android:drawableLeft="@drawable/map_icon_restaurant"
+                    android:drawablePadding="-8dp"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/roboto"
+                    android:paddingStart="@dimen/icon_padding"
+                    android:scaleType="centerInside"
+                    android:text="@string/restaurant_icon"
+                    android:textAllCaps="false"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btn_restaurant"
-                android:layout_width="120dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="@dimen/icon_margin"
-                android:background="@drawable/map_icon_background"
-                android:drawableLeft="@drawable/map_icon_restaurant"
-                android:drawablePadding="-8dp"
-                android:fontFamily="@font/roboto"
-                android:paddingStart="@dimen/icon_padding"
-                android:scaleType="centerInside"
-                android:text="@string/restaurant_icon"
-                android:textAllCaps="false"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                <Button
+                    android:id="@+id/btn_coffee"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="@dimen/icon_margin"
+                    android:background="@drawable/map_icon_background"
+                    android:drawableLeft="@drawable/map_icon_coffee"
+                    android:paddingStart="@dimen/icon_padding"
+                    android:scaleType="centerInside"
+                    android:textAllCaps="false"
+                    android:text="@string/coffee_icon"
+                    android:textStyle="bold"
+                    android:drawablePadding="-8dp"
+                    android:elevation="5dp"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/roboto" />
 
-            <Button
-                android:id="@+id/btn_coffee"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="@dimen/icon_margin"
-                android:background="@drawable/map_icon_background"
-                android:drawableLeft="@drawable/map_icon_coffee"
-                android:paddingStart="@dimen/icon_padding"
-                android:scaleType="centerInside"
-                android:textAllCaps="false"
-                android:text="@string/coffee_icon"
-                android:textStyle="bold"
-                android:drawablePadding="-8dp"
-                android:textSize="12sp"
-                android:fontFamily="@font/roboto" />
-
-            <Button
-                android:id="@+id/btn_hotel"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="@dimen/icon_margin"
-                android:background="@drawable/map_icon_background"
-                android:drawableLeft="@drawable/map_icon_hotel"
-                android:drawablePadding="-8dp"
-                android:fontFamily="@font/roboto"
-                android:paddingStart="@dimen/icon_padding"
-                android:scaleType="centerInside"
-                android:text="@string/hotel_icon"
-                android:textAllCaps="false"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                <Button
+                    android:id="@+id/btn_hotel"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="@dimen/icon_margin"
+                    android:background="@drawable/map_icon_background"
+                    android:drawableLeft="@drawable/map_icon_hotel"
+                    android:drawablePadding="-8dp"
+                    android:fontFamily="@font/roboto"
+                    android:paddingStart="@dimen/icon_padding"
+                    android:elevation="5dp"
+                    android:scaleType="centerInside"
+                    android:text="@string/hotel_icon"
+                    android:textAllCaps="false"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btn_more"
@@ -107,39 +108,50 @@
                     android:text="@string/more_icon"
                     android:textStyle="bold"
                     android:drawablePadding="-8dp"
+                    android:elevation="5dp"
                     android:textSize="12sp"
                     android:fontFamily="@font/roboto"
                     tools:ignore="RtlSymmetry,SmallSp" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="300dp"
+            android:layout_marginTop="200dp"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/btn_traffic_mode"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/btn_traffic_mode"/>
+
+            <ImageButton
+                android:id="@+id/btn_gps"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/btn_gps"/>
+
+            <ImageButton
+                android:id="@+id/btn_direction"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/btn_go" />
+
         </LinearLayout>
-    </HorizontalScrollView>
 
-    <LinearLayout
+    </FrameLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="200dp"
-        android:orientation="vertical">
-
-        <ImageButton
-            android:id="@+id/btn_traffic_mode"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/btn_traffic_mode"/>
-
-        <ImageButton
-            android:id="@+id/btn_gps"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/btn_gps"/>
-
-        <ImageButton
-            android:id="@+id/btn_direction"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/btn_go" />
-
-    </LinearLayout>
-
-</FrameLayout>
+        android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
