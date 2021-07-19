@@ -66,7 +66,7 @@ facilis nostrum et cum."/>
         android:textColor="#0A58ED"
         android:background="#fff"
         android:layout_gravity="center"
-        android:onClick="toHome">
+        android:onClick="toLogin">
     </Button>
 
 </LinearLayout>
