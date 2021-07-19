@@ -16,7 +16,7 @@ public class AboutUsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_aboutus);
     }
 
-    public void returnHome(View view) {
+    public void toHome(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
