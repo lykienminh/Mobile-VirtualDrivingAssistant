@@ -7,8 +7,7 @@
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:orientation="vertical"
-    android:background="#fff"
-    tools:context=".ui.activities.HistoryActivity">
+    android:background="#fff">
 
     <GridLayout
         android:layout_width="match_parent"
@@ -38,133 +37,27 @@
 
     </GridLayout>
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/signRecycler"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_marginBottom="80dp"-->
-<!--        android:layout_weight="1"-->
-<!--        android:clipToPadding="false"-->
-<!--        android:paddingTop="15dp"-->
-<!--        android:paddingBottom="38dp" />-->
-
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <Button
+            android:id="@+id/btn_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:id="@+id/record_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/history_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/history_time"
-                        android:textColor="@color/black"
-                        android:textSize="16dp"
-                        android:textStyle="bold"/>
-                    <TextView
-                        android:id="@+id/history_time_value"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text=""
-                        android:textSize="16dp"
-                        android:textColor="@color/black" />
-                </LinearLayout>
+            android:text="@string/location" />
 
-                <LinearLayout
-                    android:id="@+id/record_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/history_location"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/history_location"
-                        android:textSize="16dp"
-                        android:textColor="@color/black" />
-                    <TextView
-                        android:id="@+id/history_location_value"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text=""
-                        android:textSize="16dp"
-                        android:textColor="@color/black" />
+        <Button
+            android:id="@+id/btn_speed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/speed"/>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/record_speed"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/history_speed"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/history_speed"
-                        android:textSize="16dp"
-                        android:textColor="@color/black" />
-                    <TextView
-                        android:id="@+id/history_speed_value"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text=""
-                        android:textSize="16dp"
-                        android:textColor="@color/black" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/record_sign"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/history_sign"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/sign_detected"
-                        android:textSize="16dp"
-                        android:textColor="@color/black" />
-                    <TextView
-                        android:id="@+id/history_sign_value"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text=""
-                        android:textSize="16dp"
-                        android:textColor="@color/black" />
-                </LinearLayout>
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"
-                android:layout_marginBottom="15dp"/>
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
+        <Button
+            android:id="@+id/btn_traffic_sign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/traffic_sign"/>
+    </LinearLayout>
 </LinearLayout>

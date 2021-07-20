@@ -29,4 +29,7 @@
     <string name="email">Email</string>
     <string name="name">Tên</string>
     <string name="password">Mật khẩu</string>
+    <string name="location">Vị trí</string>
+    <string name="speed">Tốc độ</string>
+    <string name="traffic_sign">Biển báo giao thông</string>
 </resources>
