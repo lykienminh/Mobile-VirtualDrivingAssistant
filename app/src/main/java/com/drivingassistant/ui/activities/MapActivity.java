@@ -1,6 +1,7 @@
 package com.drivingassistant.ui.activities;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -12,8 +13,12 @@ import android.os.Bundle;
 import com.drivingassistant.R;
 import com.drivingassistant.parser.FetchURL;
 import com.drivingassistant.parser.TaskLoadedCallback;
+import com.drivingassistant.ui.retrofit.IMyService;
+import com.drivingassistant.ui.retrofit.MyLocationService;
+import com.drivingassistant.ui.retrofit.RetrofitClient;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -32,6 +37,12 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import androidx.annotation.NonNull;
 //import androidx.appcompat.widget.SearchView;
@@ -56,9 +67,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
 //
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback, TaskLoadedCallback {
@@ -71,37 +92,50 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     Button btn_restaurant;
     LatLng place1, place2;
     Polyline currentPolyline;
-
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
+    IMyService iMyService;
+    LocationRequest locationRequest;
+    static MapActivity instance;
 
     double currentLat = 0, currentLong = 0;
+
+    public static MapActivity getInstance() {
+        return instance;
+    }
+    private static final DateTimeFormatter dtfDateTime = DateTimeFormatter.ofPattern("MM/dd/uuuu HH:mm:ss");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        instance = this;
+
+        // Init Service
+        Retrofit retrofitClient = RetrofitClient.getInstance();
+        iMyService = retrofitClient.create(IMyService.class);
+
+        // Initialize fused location
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(this);
 
-        // Initialize fused location
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
         btn_restaurant = (Button) findViewById(R.id.btn_restaurant);
         btn_restaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            // Initialize url
-            String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json" + // Url
-                    "?location=" + currentLat + "," + currentLong + // Location latitude and longtitude
-                    "&radius=5000" + // Nearby radius
-                    "&types=restaurant" + // Place type
-                    "&sensor=true" + // Sensor
-                    "&key=" + getResources().getString(R.string.map_key); // Google map key
+                // Initialize url
+                String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json" + // Url
+                        "?location=" + currentLat + "," + currentLong + // Location latitude and longtitude
+                        "&radius=5000" + // Nearby radius
+                        "&types=restaurant" + // Place type
+                        "&sensor=true" + // Sensor
+                        "&key=" + getResources().getString(R.string.map_key); // Google map key
 
-            Log.wtf("khang", url);
-            // Execute place task method to download json data
-            new PlaceTask().execute(url);
+                Log.wtf("khang", url);
+                // Execute place task method to download json data
+                new PlaceTask().execute(url);
             }
         });
 
@@ -161,8 +195,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                         if (marker != null) marker.remove();
                         marker = map.addMarker(new MarkerOptions().position(place2).title(location));
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(place2, 70));
-                    }
-                    else{
+                    } else {
                         Toast.makeText(MapActivity.this, "No results found on Kime Maps.", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -187,6 +220,30 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             }
         });
 
+    }
+
+    private void updateLocation() {
+        buildLocationRequest();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, getPendingIntent());
+        Log.wtf("khang", "Update location.");
+    }
+
+    private PendingIntent getPendingIntent() {
+        Intent intent = new Intent(this, MyLocationService.class);
+        intent.setAction(MyLocationService.ACCESS_PROCESS_UPDATE);
+        Log.wtf("khang", "Pending intent.");
+        return PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
+    private void buildLocationRequest() {
+        locationRequest = new LocationRequest();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(5000);
+        locationRequest.setFastestInterval(3000);
+        locationRequest.setSmallestDisplacement(10f);
     }
 
     @Override
@@ -223,6 +280,25 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     @Override
     public void onMapReady(GoogleMap googleMap) {
         getCurrentLocation();
+        Dexter.withActivity(this)
+            .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+            .withListener(new PermissionListener() {
+                @Override
+                public void onPermissionGranted(PermissionGrantedResponse response) {
+                    Log.wtf("khang", "Dexter.");
+                    updateLocation();
+                }
+
+                @Override
+                public void onPermissionDenied(PermissionDeniedResponse response) {
+                    Toast.makeText(MapActivity.this, "You must accept this location.", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+
+                }
+            }).check();
     }
 
     private void getCurrentLocation() {
@@ -252,6 +328,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                         @Override
                         public void onMapReady(GoogleMap googleMap) {
                             map = googleMap;
+                            map.clear();
+
                             // Initialize lat lng
                             currentLat = location.getLatitude();
                             currentLong = location.getLongitude();
@@ -272,6 +350,27 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                         }
                     });
                 }
+            }
+        });
+    }
+
+    public void sendHistory(String speed, String location, String traffic_sign, String created_at) {
+        MapActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Log.wtf("khang", "Send history.");
+                compositeDisposable.add(iMyService.sendHistory(speed, location, traffic_sign, created_at)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<String>() {
+                            @Override
+                            public void accept(String response) throws Exception {
+                                getCurrentLocation();
+                                JSONObject jsonResponse = new JSONObject(response);
+                                String result = jsonResponse.getString("result");
+                                Toast.makeText(MapActivity.this, "" + result, Toast.LENGTH_SHORT).show();
+                            }
+                        }));
             }
         });
     }
