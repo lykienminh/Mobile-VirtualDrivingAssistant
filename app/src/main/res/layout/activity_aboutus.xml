@@ -35,9 +35,7 @@
         android:fontFamily="@font/roboto"
         android:textColor="@color/colorPrimary"
         android:textAlignment="center"
-        android:text="Lorem ipsum dolor sit amet, cu usu velit\n
-civibus, cu augue paulo senserit usu. Eius\n
-facilis nostrum et cum."/>
+        android:text="Find places and routes to your destination\neasily and conveniently with maps and\ndetect traffic signs with AR technology."/>
 
     <ImageView
         android:layout_width="wrap_content"
