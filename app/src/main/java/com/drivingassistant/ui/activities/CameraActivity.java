@@ -17,117 +17,99 @@
 package com.drivingassistant.ui.activities;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.params.StreamConfigurationMap;
-import android.location.GpsSatellite;
-import android.location.GpsStatus;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.Image;
 import android.media.Image.Plane;
 import android.media.ImageReader;
 import android.media.ImageReader.OnImageAvailableListener;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Trace;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 
-import com.drivingassistant.R;
-import com.drivingassistant.application.DrivingAssistantApplication;
-import com.drivingassistant.di.components.ApplicationComponent;
-import com.drivingassistant.model.bus.MessageEventBus;
-import com.drivingassistant.model.bus.model.EventGpsDisabled;
-import com.drivingassistant.model.bus.model.EventUpdateLocation;
-import com.drivingassistant.model.bus.model.EventUpdateStatus;
-import com.drivingassistant.model.entity.Data;
-import com.drivingassistant.model.entity.GpsStatusEntity;
-import com.drivingassistant.ui.fragments.CameraConnectionFragment;
-import com.drivingassistant.ui.fragments.LegacyCameraConnectionFragment;
+import com.drivingassistant.utils.BaseGpsListener;
+import com.drivingassistant.utils.CLocation;
 import com.drivingassistant.utils.env.ImageUtils;
 import com.drivingassistant.utils.env.Logger;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-
 import java.nio.ByteBuffer;
+import java.util.Formatter;
+import java.util.Locale;
+import com.drivingassistant.R;
 
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static android.location.GpsStatus.GPS_EVENT_SATELLITE_STATUS;
 
 public abstract class CameraActivity extends AppCompatActivity
         implements OnImageAvailableListener,
         Camera.PreviewCallback,
         CompoundButton.OnCheckedChangeListener,
-        View.OnClickListener {
+        View.OnClickListener,
+        BaseGpsListener {
     private static final Logger LOGGER = new Logger();
 
     private static final int PERMISSIONS_REQUEST = 1;
 
     private static final String PERMISSION_CAMERA = Manifest.permission.CAMERA;
-    //private static final String PERMISSION_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     protected int previewWidth = 0;
     protected int previewHeight = 0;
+    private boolean debug = false;
     private Handler handler;
     private HandlerThread handlerThread;
     private boolean useCamera2API;
     private boolean isProcessingFrame = false;
-    private final byte[][] yuvBytes = new byte[3][];
+    private byte[][] yuvBytes = new byte[3][];
     private int[] rgbBytes = null;
     private int yRowStride;
     private Runnable postInferenceCallback;
     private Runnable imageConverter;
 
-    private LinearLayout gestureLayout;
-    private BottomSheetBehavior sheetBehavior;
+    private LinearLayout bottomSheetLayout;
+//  private LinearLayout gestureLayout;
+//  private BottomSheetBehavior<LinearLayout> sheetBehavior;
 
-    protected TextView frameValueTextView, cropValueTextView, inferenceTimeTextView;
-    protected ImageView bottomSheetArrowImageView;
-    private ImageView minusImageView;
+    protected TextView  cropValueTextView, inferenceTimeTextView;
+    //  protected ImageView bottomSheetArrowImageView;
+    private ImageView plusImageView, minusImageView;
     private SwitchCompat apiSwitchCompat;
     private TextView threadsTextView;
-
-    private LocationManager mLocationManager;
-    double currentLon = 0;
-    double currentLat = 0;
-    double lastLon = 0;
-    double lastLat = 0;
-
-    Location lastlocation = new Location("last");
-    Data data;
+    private TextView txtCurrentSpeed;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        LOGGER.d("onCreate " + this);
         super.onCreate(null);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        setContentView(R.layout.activity_camera);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        setContentView(R.layout.tfe_od_activity_camera);
+//    Toolbar toolbar = findViewById(R.id.toolbar);
+//    setSupportActionBar(toolbar);
+//    getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         if (hasPermission()) {
             setFragment();
@@ -136,67 +118,85 @@ public abstract class CameraActivity extends AppCompatActivity
         }
 
         threadsTextView = findViewById(R.id.threads);
-        ImageView plusImageView = findViewById(R.id.plus);
+        plusImageView = findViewById(R.id.plus);
         minusImageView = findViewById(R.id.minus);
         apiSwitchCompat = findViewById(R.id.api_info_switch);
-        LinearLayout bottomSheetLayout = findViewById(R.id.bottom_sheet_layout);
-        gestureLayout = findViewById(R.id.gesture_layout);
-        sheetBehavior = BottomSheetBehavior.from(bottomSheetLayout);
-        bottomSheetArrowImageView = findViewById(R.id.bottom_sheet_arrow);
+        bottomSheetLayout = findViewById(R.id.bottom_sheet_layout);
 
-        ViewTreeObserver vto = gestureLayout.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                            gestureLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                        } else {
-                            gestureLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                        }
-                        int height = gestureLayout.getMeasuredHeight();
+        txtCurrentSpeed = findViewById(R.id.currentSpeedTxt);
 
-                        sheetBehavior.setPeekHeight(height);
-                    }
-                });
-        sheetBehavior.setHideable(false);
-
-        sheetBehavior.setBottomSheetCallback(
-                new BottomSheetBehavior.BottomSheetCallback() {
-                    @Override
-                    public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                        switch (newState) {
-                            case BottomSheetBehavior.STATE_HIDDEN:
-                                break;
-                            case BottomSheetBehavior.STATE_EXPANDED: {
-                                bottomSheetArrowImageView.setImageResource(R.drawable.icn_chevron_down);
-                            }
-                            break;
-                            case BottomSheetBehavior.STATE_COLLAPSED: {
-                                bottomSheetArrowImageView.setImageResource(R.drawable.icn_chevron_up);
-                            }
-                            break;
-                            case BottomSheetBehavior.STATE_DRAGGING:
-                                break;
-                            case BottomSheetBehavior.STATE_SETTLING:
-                                bottomSheetArrowImageView.setImageResource(R.drawable.icn_chevron_up);
-                                break;
-                        }
-                    }
-
-                    @Override
-                    public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                    }
-                });
-
-        frameValueTextView = findViewById(R.id.frame_info);
         cropValueTextView = findViewById(R.id.crop_info);
         inferenceTimeTextView = findViewById(R.id.inference_info);
 
-        apiSwitchCompat.setOnCheckedChangeListener(this);
 
         plusImageView.setOnClickListener(this);
         minusImageView.setOnClickListener(this);
+
+//    LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+//    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+//    this.updateSpeed(null);
+        Log.wtf("Hoang", "here");
+    }
+
+    public void finish() {
+        super.finish();
+        System.exit(0);
+    }
+
+    private void updateSpeed(CLocation location) {
+        float nCurrentSpeed = 0;
+
+        if (location != null){
+            location.setUserMetricUnits(this.useMetricUnits());
+            nCurrentSpeed = location.getSpeed();
+        }
+
+        Formatter fmt = new Formatter(new StringBuilder());
+        fmt.format(Locale.US, "%3.1f", nCurrentSpeed);
+        String strCurrentSpeed = fmt.toString();
+        strCurrentSpeed = strCurrentSpeed.replace(' ', '0');
+        String strUnit = "miles/hour";
+        if (this.useMetricUnits()){
+            strUnit = "km/h";
+        }
+
+        txtCurrentSpeed = findViewById(R.id.currentSpeedTxt);
+        txtCurrentSpeed.setText(strCurrentSpeed + " " + strUnit);
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        if (location != null){
+            CLocation myLocation = new CLocation(location, this.useMetricUnits());
+            this.updateSpeed(myLocation);
+        }
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onGpsStatusChanged(int event) {
+
+    }
+
+    private boolean useMetricUnits() {
+//    CheckBox cb = findViewById(R.id.meterCb);
+//    return cb.isChecked();
+        return true;
     }
 
     protected int[] getRgbBytes() {
@@ -204,9 +204,15 @@ public abstract class CameraActivity extends AppCompatActivity
         return rgbBytes;
     }
 
-    /**
-     * Callback for android.hardware.Camera API
-     */
+    protected int getLuminanceStride() {
+        return yRowStride;
+    }
+
+    protected byte[] getLuminance() {
+        return yuvBytes[0];
+    }
+
+    /** Callback for android.hardware.Camera API */
     @Override
     public void onPreviewFrame(final byte[] bytes, final Camera camera) {
         if (isProcessingFrame) {
@@ -251,9 +257,7 @@ public abstract class CameraActivity extends AppCompatActivity
         processImage();
     }
 
-    /**
-     * Callback for Camera2 API
-     */
+    /** Callback for Camera2 API */
     @Override
     public void onImageAvailable(final ImageReader reader) {
         // We need wait until we have some size from onPreviewSizeChosen
@@ -327,43 +331,15 @@ public abstract class CameraActivity extends AppCompatActivity
     public synchronized void onResume() {
         LOGGER.d("onResume " + this);
         super.onResume();
-        if (hasLocationPermission()) {
-            setupLocation();
-        }
 
         handlerThread = new HandlerThread("inference");
         handlerThread.start();
         handler = new Handler(handlerThread.getLooper());
     }
 
-    private void setupLocation() {
-        mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        mLocationManager.addGpsStatusListener(gpsStatus);
-        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 0, locationListener);
-
-        if (!mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            MessageEventBus.INSTANCE.send(new EventGpsDisabled());
-        }
-    }
-
     @Override
     public synchronized void onPause() {
         LOGGER.d("onPause " + this);
-
-//        if (mBound) {
-//            unbindService(serviceConnection);
-//            mBound = false;
-//        }
 
         handlerThread.quitSafely();
         try {
@@ -380,18 +356,13 @@ public abstract class CameraActivity extends AppCompatActivity
     @Override
     public synchronized void onStop() {
         LOGGER.d("onStop " + this);
-
         super.onStop();
     }
 
     @Override
     public synchronized void onDestroy() {
         LOGGER.d("onDestroy " + this);
-
         super.onDestroy();
-
-        mLocationManager.removeUpdates(locationListener);
-        mLocationManager.removeGpsStatusListener(gpsStatus);
     }
 
     protected synchronized void runInBackground(final Runnable r) {
@@ -400,25 +371,29 @@ public abstract class CameraActivity extends AppCompatActivity
         }
     }
 
-    @SuppressLint("MissingSuperCall")
     @Override
     public void onRequestPermissionsResult(
             final int requestCode, final String[] permissions, final int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSIONS_REQUEST) {
-            if (grantResults.length > 0) {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    setFragment();
-                }
-                if (grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    setupLocation();
-//                    Intent intent = new Intent(this, GpsService.class);
-//                    bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
-                }
+            if (allPermissionsGranted(grantResults)) {
+                setFragment();
+            } else {
+                requestPermission();
             }
         }
     }
 
-    protected boolean hasPermission() {
+    private static boolean allPermissionsGranted(final int[] grantResults) {
+        for (int result : grantResults) {
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean hasPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return checkSelfPermission(PERMISSION_CAMERA) == PackageManager.PERMISSION_GRANTED;
         } else {
@@ -426,25 +401,16 @@ public abstract class CameraActivity extends AppCompatActivity
         }
     }
 
-    protected boolean hasLocationPermission() {
+    private void requestPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return checkSelfPermission(ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-        } else {
-            return true;
-        }
-    }
-
-    protected void requestPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (shouldShowRequestPermissionRationale(PERMISSION_CAMERA) ||
-                    shouldShowRequestPermissionRationale(ACCESS_FINE_LOCATION)) {
-//                Toast.makeText(
-//                        CameraActivity.this,
-//                        "Camera permission is required for this demo",
-//                        Toast.LENGTH_LONG)
-//                        .show();
+            if (shouldShowRequestPermissionRationale(PERMISSION_CAMERA)) {
+                Toast.makeText(
+                        CameraActivity.this,
+                        "Camera permission is required for this demo",
+                        Toast.LENGTH_LONG)
+                        .show();
             }
-            requestPermissions(new String[]{PERMISSION_CAMERA, ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST);
+            requestPermissions(new String[] {PERMISSION_CAMERA}, PERMISSIONS_REQUEST);
         }
     }
 
@@ -496,13 +462,14 @@ public abstract class CameraActivity extends AppCompatActivity
     }
 
     protected void setFragment() {
+        Log.wtf("Hoang", "setFragment ran");
         String cameraId = chooseCamera();
 
         Fragment fragment;
         if (useCamera2API) {
-            CameraConnectionFragment camera2Fragment =
-                    CameraConnectionFragment.newInstance(
-                            new CameraConnectionFragment.ConnectionCallback() {
+            com.drivingassistant.ui.fragments.CameraConnectionFragment camera2Fragment =
+                    com.drivingassistant.ui.fragments.CameraConnectionFragment.newInstance(
+                            new com.drivingassistant.ui.fragments.CameraConnectionFragment.ConnectionCallback() {
                                 @Override
                                 public void onPreviewSizeChosen(final Size size, final int rotation) {
                                     previewHeight = size.getHeight();
@@ -518,10 +485,11 @@ public abstract class CameraActivity extends AppCompatActivity
             fragment = camera2Fragment;
         } else {
             fragment =
-                    new LegacyCameraConnectionFragment(this, getLayoutId(), getDesiredPreviewFrameSize());
+                    new com.drivingassistant.ui.fragments.LegacyCameraConnectionFragment(this, getLayoutId(), getDesiredPreviewFrameSize());
         }
 
         getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+        Log.wtf("Hoang", "setFragment end");
     }
 
     protected void fillBytes(final Plane[] planes, final byte[][] yuvBytes) {
@@ -538,7 +506,6 @@ public abstract class CameraActivity extends AppCompatActivity
     }
 
     public boolean isDebug() {
-        boolean debug = false;
         return debug;
     }
 
@@ -589,13 +556,9 @@ public abstract class CameraActivity extends AppCompatActivity
         }
     }
 
-    public ApplicationComponent getApplicationComponent() {
-        return ((DrivingAssistantApplication) getApplication()).getApplicationComponent();
-    }
-
-    protected void showFrameInfo(String frameInfo) {
-        frameValueTextView.setText(frameInfo);
-    }
+//  protected void showFrameInfo(String frameInfo) {
+//    frameValueTextView.setText(frameInfo);
+//  }
 
     protected void showCropInfo(String cropInfo) {
         cropValueTextView.setText(cropInfo);
@@ -616,115 +579,4 @@ public abstract class CameraActivity extends AppCompatActivity
     protected abstract void setNumThreads(int numThreads);
 
     protected abstract void setUseNNAPI(boolean isChecked);
-
-    private LocationListener locationListener = new LocationListener() {
-
-        @Override
-        public void onLocationChanged(Location location) {
-            data = new Data();
-            data.setLocation(location);
-            currentLat = location.getLatitude();
-            currentLon = location.getLongitude();
-
-            double distance = 0;
-
-            if (lastLat != 0 && lastLon != 0){
-                lastlocation.setLatitude(lastLat);
-                lastlocation.setLongitude(lastLon);
-                distance = lastlocation.distanceTo(location);
-            }
-
-            if (location.getAccuracy() < distance || distance == 0) {
-                data.setDistance(distance);
-                lastLat = currentLat;
-                lastLon = currentLon;
-            }
-
-            if (location.hasSpeed()) {
-                data.setCurSpeed(location.getSpeed() * 3.6);
-                if (location.getSpeed() == 0) {
-                    new isStillStopped().execute();
-                }
-            }
-
-            MessageEventBus.INSTANCE.send(new EventUpdateLocation(data));
-        }
-
-        @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String s) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String s) {
-
-        }
-    };
-
-    private class isStillStopped extends AsyncTask<Void, Integer, String> {
-        int timer = 0;
-
-        @Override
-        protected String doInBackground(Void... unused) {
-            try {
-                while (data.getCurSpeed() == 0) {
-                    Thread.sleep(1000);
-                    timer++;
-                }
-            } catch (InterruptedException t) {
-                return ("The sleep operation failed");
-            }
-            return ("return object when task is finished");
-        }
-
-        @Override
-        protected void onPostExecute(String message) {
-            data.setTimeStopped(timer);
-        }
-    }
-
-    private GpsStatus.Listener gpsStatus = event -> {
-        switch (event) {
-            case GPS_EVENT_SATELLITE_STATUS:
-                @SuppressLint("MissingPermission") GpsStatus gpsStatus = mLocationManager.getGpsStatus(null);
-                int satsInView = 0, satsUsed = 0;
-                Iterable<GpsSatellite> sats = gpsStatus.getSatellites();
-                for (GpsSatellite sat : sats) {
-                    satsInView++;
-                    if (sat.usedInFix()) {
-                        satsUsed++;
-                    }
-                }
-
-                String satellite = satsUsed + "/" + satsInView;
-                String accuracy = null;
-                String status = null;
-                if (satsUsed == 0) {
-                    accuracy = "";
-                    status = getResources().getString(R.string.waiting_for_fix);
-                }
-
-                MessageEventBus.INSTANCE.send(new EventUpdateStatus(new GpsStatusEntity(satellite, status, accuracy)));
-
-                break;
-
-            case GpsStatus.GPS_EVENT_STOPPED:
-                if (!mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    MessageEventBus.INSTANCE.send(new EventGpsDisabled());
-                }
-                break;
-            case GpsStatus.GPS_EVENT_FIRST_FIX:
-                break;
-        }
-    };
-
-    public void returnHome(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
 }

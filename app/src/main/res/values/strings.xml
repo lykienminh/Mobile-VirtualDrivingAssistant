@@ -22,5 +22,6 @@
     <string name="hotel_icon">Hotels</string>
     <string name="coffee_icon">Coffee</string>
     <string name="more_icon">More</string>
+    <string name="tfe_od_camera_error" translation_description="Error regarding camera support[CHAR_LIMIT=40]">This device doesn\'t support Camera2 API.</string>
 
 </resources>

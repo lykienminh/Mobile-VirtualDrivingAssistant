@@ -15,4 +15,5 @@
     <color name="cod_gray">#1C1C1C</color>
     <color name="dove_gray">#707070</color>
     <color name="porcelain">#ECEFF1</color>
+    <color name="tfe_semi_transparent">#66000000</color>
 </resources>

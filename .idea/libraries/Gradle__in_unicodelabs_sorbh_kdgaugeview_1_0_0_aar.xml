@@ -1,19 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: in.unicodelabs.sorbh:kdgaugeview:1.0.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2ea3a76250af1a080091d65c8f03e09e/jetified-kdgaugeview-1.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2ea3a76250af1a080091d65c8f03e09e/jetified-kdgaugeview-1.0.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2ea3a76250af1a080091d65c8f03e09e/jetified-kdgaugeview-1.0.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0baa985936a564d7acbf9ee5b439561c/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0baa985936a564d7acbf9ee5b439561c/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0baa985936a564d7acbf9ee5b439561c/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9c13120e2b65131241b4284958f0ef89/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9c13120e2b65131241b4284958f0ef89/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9c13120e2b65131241b4284958f0ef89/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7e6e5600590933cf3710ecdffa80347e/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7e6e5600590933cf3710ecdffa80347e/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7e6e5600590933cf3710ecdffa80347e/AndroidManifest.xml" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/in.unicodelabs.sorbh/kdgaugeview/1.0.0/c40594a1483f8b6ea91ccd5dfa9079a57f749bc4/kdgaugeview-1.0.0-javadoc.jar!/" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/in.unicodelabs.sorbh/kdgaugeview/1.0.0/40b4f85a53c51e956229adfbbcb916dd92c6ee6c/kdgaugeview-1.0.0-sources.jar!/" />
     </SOURCES>

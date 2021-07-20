@@ -16,6 +16,7 @@
 
 package com.drivingassistant.ui.fragments;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,10 +25,10 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -48,17 +49,13 @@ import android.text.TextUtils;
 import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.drivingassistant.R;
-import com.drivingassistant.utils.customview.AutoFitTextureView;
-import com.drivingassistant.utils.customview.OverlayView;
-import com.drivingassistant.utils.env.Logger;
+import androidx.core.app.ActivityCompat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,6 +65,9 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
+import com.drivingassistant.R;
+import com.drivingassistant.utils.customview.AutoFitTextureView;
+import com.drivingassistant.utils.env.Logger;
 
 @SuppressLint("ValidFragment")
 public class CameraConnectionFragment extends Fragment {
@@ -79,9 +79,7 @@ public class CameraConnectionFragment extends Fragment {
      */
     private static final int MINIMUM_PREVIEW_SIZE = 320;
 
-    /**
-     * Conversion from screen rotation to JPEG orientation.
-     */
+    /** Conversion from screen rotation to JPEG orientation. */
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
 
     private static final String FRAGMENT_DIALOG = "dialog";
@@ -93,21 +91,13 @@ public class CameraConnectionFragment extends Fragment {
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
 
-    /**
-     * A {@link Semaphore} to prevent the app from exiting before closing the camera.
-     */
+    /** A {@link Semaphore} to prevent the app from exiting before closing the camera. */
     private final Semaphore cameraOpenCloseLock = new Semaphore(1);
-    /**
-     * A {@link OnImageAvailableListener} to receive frames as they are available.
-     */
+    /** A {@link OnImageAvailableListener} to receive frames as they are available. */
     private final OnImageAvailableListener imageListener;
-    /**
-     * The input size in pixels desired by TensorFlow (width and height of a square bitmap).
-     */
+    /** The input size in pixels desired by TensorFlow (width and height of a square bitmap). */
     private final Size inputSize;
-    /**
-     * The layout identifier to inflate for this Fragment.
-     */
+    /** The layout identifier to inflate for this Fragment. */
     private final int layout;
 
     private final ConnectionCallback cameraConnectionCallback;
@@ -127,53 +117,29 @@ public class CameraConnectionFragment extends Fragment {
                         final TotalCaptureResult result) {
                 }
             };
-    /**
-     * ID of the current {@link CameraDevice}.
-     */
+    /** ID of the current {@link CameraDevice}. */
     private String cameraId;
-    /**
-     * An {@link AutoFitTextureView} for camera preview.
-     */
+    /** An {@link AutoFitTextureView} for camera preview. */
     private AutoFitTextureView textureView;
-    /**
-     * A {@link CameraCaptureSession } for camera preview.
-     */
+    /** A {@link CameraCaptureSession } for camera preview. */
     private CameraCaptureSession captureSession;
-    /**
-     * A reference to the opened {@link CameraDevice}.
-     */
+    /** A reference to the opened {@link CameraDevice}. */
     private CameraDevice cameraDevice;
-    /**
-     * The rotation in degrees of the camera sensor from the display.
-     */
+    /** The rotation in degrees of the camera sensor from the display. */
     private Integer sensorOrientation;
-    /**
-     * The {@link Size} of camera preview.
-     */
+    /** The {@link Size} of camera preview. */
     private Size previewSize;
-    /**
-     * An additional thread for running tasks that shouldn't block the UI.
-     */
+    /** An additional thread for running tasks that shouldn't block the UI. */
     private HandlerThread backgroundThread;
-    /**
-     * A {@link Handler} for running tasks in the background.
-     */
+    /** A {@link Handler} for running tasks in the background. */
     private Handler backgroundHandler;
-    /**
-     * An {@link ImageReader} that handles preview frame capture.
-     */
+    /** An {@link ImageReader} that handles preview frame capture. */
     private ImageReader previewReader;
-    /**
-     * {@link CaptureRequest.Builder} for the camera preview
-     */
+    /** {@link CaptureRequest.Builder} for the camera preview */
     private CaptureRequest.Builder previewRequestBuilder;
-    /**
-     * {@link CaptureRequest} generated by {@link #previewRequestBuilder}
-     */
+    /** {@link CaptureRequest} generated by {@link #previewRequestBuilder} */
     private CaptureRequest previewRequest;
-    /**
-     * {@link CameraDevice.StateCallback} is called when {@link CameraDevice} changes its state.
-     */
+    /** {@link CameraDevice.StateCallback} is called when {@link CameraDevice} changes its state. */
     private final CameraDevice.StateCallback stateCallback =
             new CameraDevice.StateCallback() {
                 @Override
@@ -246,8 +212,8 @@ public class CameraConnectionFragment extends Fragment {
      * width and height are at least as large as the minimum of both, or an exact match if possible.
      *
      * @param choices The list of sizes that the camera supports for the intended output class
-     * @param width   The minimum desired width
-     * @param height  The minimum desired height
+     * @param width The minimum desired width
+     * @param height The minimum desired height
      * @return The optimal {@code Size}, or an arbitrary one if none were big enough
      */
     protected static Size chooseOptimalSize(final Size[] choices, final int width, final int height) {
@@ -326,8 +292,6 @@ public class CameraConnectionFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         textureView = (AutoFitTextureView) view.findViewById(R.id.texture);
-        overlayView  = (OverlayView) view.findViewById(R.id.tracking_overlay);
-
     }
 
     @Override
@@ -362,21 +326,12 @@ public class CameraConnectionFragment extends Fragment {
         this.cameraId = cameraId;
     }
 
-    /**
-     * Sets up member variables related to camera.
-     */
-    CameraCharacteristics characteristics = null;
-    OverlayView overlayView;
-    public float fingerSpacing = 0;
-    public float zoomLevel = 1f;
-    public float maximumZoomLevel;
-    public Rect zoom;
+    /** Sets up member variables related to camera. */
     private void setUpCameraOutputs() {
         final Activity activity = getActivity();
         final CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
         try {
-            characteristics = manager.getCameraCharacteristics(cameraId);
-            maximumZoomLevel = (characteristics.get(CameraCharacteristics.SCALER_AVAILABLE_MAX_DIGITAL_ZOOM));
+            final CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraId);
 
             final StreamConfigurationMap map =
                     characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
@@ -404,69 +359,15 @@ public class CameraConnectionFragment extends Fragment {
         } catch (final NullPointerException e) {
             // Currently an NPE is thrown when the Camera2API is used but not supported on the
             // device this code runs.
-            // TODO(andrewharp): abstract ErrorDialog/RuntimeException handling out into new method and
-            // reuse throughout app.
-            ErrorDialog.newInstance(getString(R.string.camera_error))
+            ErrorDialog.newInstance(getString(R.string.tfe_od_camera_error))
                     .show(getChildFragmentManager(), FRAGMENT_DIALOG);
-            throw new RuntimeException(getString(R.string.camera_error));
+            throw new IllegalStateException(getString(R.string.tfe_od_camera_error));
         }
 
         cameraConnectionCallback.onPreviewSizeChosen(previewSize, sensorOrientation);
-
-        overlayView.setOnTouchListener((v, event) -> {
-            try {
-                Rect rect = characteristics.get(CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE);
-                if (rect == null) return false;
-                float currentFingerSpacing;
-
-                if (event.getPointerCount() == 2) { //Multi touch.
-                    currentFingerSpacing = getFingerSpacing(event);
-                    float delta = 0.05f; //Control this value to control the zooming sensibility
-                    if (fingerSpacing != 0) {
-                        if (currentFingerSpacing > fingerSpacing) { //Don't over zoom-in
-                            if ((maximumZoomLevel - zoomLevel) <= delta) {
-                                delta = maximumZoomLevel - zoomLevel;
-                            }
-                            zoomLevel = zoomLevel + delta;
-                        } else if (currentFingerSpacing < fingerSpacing){ //Don't over zoom-out
-                            if ((zoomLevel - delta) < 1f) {
-                                delta = zoomLevel - 1f;
-                            }
-                            zoomLevel = zoomLevel - delta;
-                        }
-                        float ratio = (float) 1 / zoomLevel; //This ratio is the ratio of cropped Rect to Camera's original(Maximum) Rect
-                        //croppedWidth and croppedHeight are the pixels cropped away, not pixels after cropped
-                        int croppedWidth = rect.width() - Math.round((float)rect.width() * ratio);
-                        int croppedHeight = rect.height() - Math.round((float)rect.height() * ratio);
-                        //Finally, zoom represents the zoomed visible area
-                        zoom = new Rect(croppedWidth/2, croppedHeight/2,
-                                rect.width() - croppedWidth/2, rect.height() - croppedHeight/2);
-                        previewRequestBuilder.set(CaptureRequest.SCALER_CROP_REGION, zoom);
-                    }
-                    fingerSpacing = currentFingerSpacing;
-                } else { //Single touch point, needs to return true in order to detect one more touch point
-                    return true;
-                }
-                captureSession.setRepeatingRequest(previewRequestBuilder.build(), captureCallback, null);
-                return true;
-            } catch (final Exception e) {
-                //Error handling up to you
-                return true;
-            }
-
-        });
-
     }
 
-    private float getFingerSpacing(MotionEvent event) {
-        float x = event.getX(0) - event.getX(1);
-        float y = event.getY(0) - event.getY(1);
-        return (float) Math.sqrt(x * x + y * y);
-    }
-
-    /**
-     * Opens the camera specified by {@link CameraConnectionFragment#cameraId}.
-     */
+    /** Opens the camera specified by {@link CameraConnectionFragment#cameraId}. */
     @SuppressLint("MissingPermission")
     private void openCamera(final int width, final int height) {
         setUpCameraOutputs();
@@ -477,6 +378,7 @@ public class CameraConnectionFragment extends Fragment {
             if (!cameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
                 throw new RuntimeException("Time out waiting to lock camera opening.");
             }
+
             manager.openCamera(cameraId, stateCallback, backgroundHandler);
         } catch (final CameraAccessException e) {
             LOGGER.e(e, "Exception!");
@@ -485,9 +387,7 @@ public class CameraConnectionFragment extends Fragment {
         }
     }
 
-    /**
-     * Closes the current {@link CameraDevice}.
-     */
+    /** Closes the current {@link CameraDevice}. */
     private void closeCamera() {
         try {
             cameraOpenCloseLock.acquire();
@@ -510,18 +410,14 @@ public class CameraConnectionFragment extends Fragment {
         }
     }
 
-    /**
-     * Starts a background thread and its {@link Handler}.
-     */
+    /** Starts a background thread and its {@link Handler}. */
     private void startBackgroundThread() {
         backgroundThread = new HandlerThread("ImageListener");
         backgroundThread.start();
         backgroundHandler = new Handler(backgroundThread.getLooper());
     }
 
-    /**
-     * Stops the background thread and its {@link Handler}.
-     */
+    /** Stops the background thread and its {@link Handler}. */
     private void stopBackgroundThread() {
         backgroundThread.quitSafely();
         try {
@@ -533,9 +429,7 @@ public class CameraConnectionFragment extends Fragment {
         }
     }
 
-    /**
-     * Creates a new {@link CameraCaptureSession} for camera preview.
-     */
+    /** Creates a new {@link CameraCaptureSession} for camera preview. */
     private void createCameraPreviewSession() {
         try {
             final SurfaceTexture texture = textureView.getSurfaceTexture();
@@ -609,7 +503,7 @@ public class CameraConnectionFragment extends Fragment {
      * called after the camera preview size is determined in setUpCameraOutputs and also the size of
      * `mTextureView` is fixed.
      *
-     * @param viewWidth  The width of `mTextureView`
+     * @param viewWidth The width of `mTextureView`
      * @param viewHeight The height of `mTextureView`
      */
     private void configureTransform(final int viewWidth, final int viewHeight) {
@@ -646,9 +540,7 @@ public class CameraConnectionFragment extends Fragment {
         void onPreviewSizeChosen(Size size, int cameraRotation);
     }
 
-    /**
-     * Compares two {@code Size}s based on their areas.
-     */
+    /** Compares two {@code Size}s based on their areas. */
     static class CompareSizesByArea implements Comparator<Size> {
         @Override
         public int compare(final Size lhs, final Size rhs) {
@@ -658,9 +550,7 @@ public class CameraConnectionFragment extends Fragment {
         }
     }
 
-    /**
-     * Shows an error message dialog.
-     */
+    /** Shows an error message dialog. */
     public static class ErrorDialog extends DialogFragment {
         private static final String ARG_MESSAGE = "message";
 

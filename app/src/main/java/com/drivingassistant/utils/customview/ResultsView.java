@@ -15,8 +15,9 @@ limitations under the License.
 
 package com.drivingassistant.utils.customview;
 
-import java.util.List;
 import com.drivingassistant.tflite.detection.Classifier.Recognition;
+
+import java.util.List;
 
 public interface ResultsView {
   public void setResults(final List<Recognition> results);

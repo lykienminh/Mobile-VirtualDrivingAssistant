@@ -1,12 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.dagger:dagger-lint-aar:2.35.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b68dfefa52f22eb4f53bd76623155c1d/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b68dfefa52f22eb4f53bd76623155c1d/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b68dfefa52f22eb4f53bd76623155c1d/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fbfea0e1af44f953ef26568a0978641a/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fbfea0e1af44f953ef26568a0978641a/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fbfea0e1af44f953ef26568a0978641a/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ac6e93114194bac54b37f256d23f16e8/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ac6e93114194bac54b37f256d23f16e8/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ac6e93114194bac54b37f256d23f16e8/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
