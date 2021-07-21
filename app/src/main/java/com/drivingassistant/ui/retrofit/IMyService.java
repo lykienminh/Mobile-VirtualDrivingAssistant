@@ -1,5 +1,7 @@
 package com.drivingassistant.ui.retrofit;
 
+import java.util.Date;
+
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -19,7 +21,8 @@ public interface IMyService {
     @POST("history")
     @FormUrlEncoded
     Observable<String> sendHistory(@Field("speed") String speed,
-                                   @Field("location") String location,
+                                   @Field("latitude") String latitude,
+                                   @Field("longitude") String longitude,
                                    @Field("traffic_sign") String traffic_sign,
                                    @Field("created_at") String created_at);
 

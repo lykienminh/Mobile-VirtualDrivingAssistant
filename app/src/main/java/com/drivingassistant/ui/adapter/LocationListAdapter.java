@@ -1,4 +1,4 @@
-package com.drivingassistant.adapter;
+package com.drivingassistant.ui.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,9 +51,8 @@ public class LocationListAdapter extends BaseAdapter {
 
         //Bind sữ liệu phần tử vào View
         UserLocation location = (UserLocation) getItem(position);
-        ((TextView) viewLocation.findViewById(R.id.time)).setText(String.format("At: %s", location.time));
+        ((TextView) viewLocation.findViewById(R.id.time)).setText(String.format("At %s", location.time));
         ((TextView) viewLocation.findViewById(R.id.location)).setText(location.location);
-
         return viewLocation;
     }
 }

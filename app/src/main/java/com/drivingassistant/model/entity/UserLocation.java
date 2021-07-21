@@ -1,5 +1,7 @@
 package com.drivingassistant.model.entity;
 
+import java.util.Date;
+
 public class UserLocation {
     public String location;
     public String time;

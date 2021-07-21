@@ -354,12 +354,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         });
     }
 
-    public void sendHistory(String speed, String location, String traffic_sign, String created_at) {
+    public void sendHistory(String speed, String latitude, String longitude, String traffic_sign, String created_at) {
         MapActivity.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Log.wtf("khang", "Send history.");
-                compositeDisposable.add(iMyService.sendHistory(speed, location, traffic_sign, created_at)
+                compositeDisposable.add(iMyService.sendHistory(speed, latitude, longitude, traffic_sign, created_at)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<String>() {
@@ -368,7 +368,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                                 getCurrentLocation();
                                 JSONObject jsonResponse = new JSONObject(response);
                                 String result = jsonResponse.getString("result");
-                                Toast.makeText(MapActivity.this, "" + result, Toast.LENGTH_SHORT).show();
+                                Log.wtf("khang", result);
                             }
                         }));
             }

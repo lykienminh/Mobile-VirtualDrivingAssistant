@@ -17,13 +17,15 @@ public class JSONParserHistory {
 
         try {
             String speed = object.getString("speed");
-            String location = object.getString("location");
+            String latitude = object.getString("latitude");
+            String longitude = object.getString("longitude");
             String traffic_sign = object.getString("traffic_sign");
             String created_at = object.getString("created_at");
 
             // Put all value in hash map
             dataList.put("speed", speed);
-            dataList.put("location", location);
+            dataList.put("latitude", latitude);
+            dataList.put("longitude", longitude);
             dataList.put("traffic_sign", traffic_sign);
             dataList.put("created_at", created_at);
 

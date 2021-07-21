@@ -33,10 +33,8 @@ public class MyLocationService extends BroadcastReceiver {
                 LocationResult result = LocationResult.extractResult(intent);
                 if (result != null){
                     Location location = result.getLastLocation();
-                    String location_string = new StringBuilder("" + location.getLatitude())
-                            .append("/")
-                            .append(location.getLongitude())
-                            .toString();
+                    String latitude = Double.toString(location.getLatitude());
+                    String longitude = Double.toString(location.getLongitude());
 
                     // seconds passed since the Unix epoch time (midnight of January 1, 1970 UTC)
                     Instant now = Instant.now();
@@ -45,7 +43,7 @@ public class MyLocationService extends BroadcastReceiver {
                     String time = dtfDateTime.format(localDateTime);
                     Log.wtf("khang", time);
                     try{
-                        MapActivity.getInstance().sendHistory("", location_string, "", time);
+                        MapActivity.getInstance().sendHistory("", latitude, longitude, "", time);
                     }
                     catch (Exception ex){
                         ex.printStackTrace();
