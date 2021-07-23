@@ -11,28 +11,59 @@
         android:id="@+id/bgd_circ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/settings_background_circle" />
+
+    <ImageButton
+        android:id="@+id/btn_left_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="@null"
+        android:onClick="returnHome"
+        app:layout_constraintBottom_toBottomOf="@+id/str_settings"
+        app:layout_constraintStart_toStartOf="@+id/bgd_rec"
+        app:layout_constraintTop_toTopOf="@+id/str_settings"
+        app:srcCompat="@drawable/settings_icon_left_arrow" />
+
+    <TextView
+        android:id="@+id/str_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto"
+        android:outlineAmbientShadowColor="#801717"
+        android:outlineSpotShadowColor="#880808"
+        android:shadowColor="#B12323"
+        android:text="@string/stg_settings"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/bgd_circ"
+        app:layout_constraintStart_toStartOf="@+id/bgd_circ"
+        app:layout_constraintTop_toTopOf="@+id/bgd_circ" />
 
     <ImageView
         android:id="@+id/bgd_rec"
         android:layout_width="324dp"
         android:layout_height="500dp"
-        android:layout_marginTop="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/bgd_circ"
         app:layout_constraintStart_toStartOf="@id/bgd_circ"
         app:layout_constraintTop_toTopOf="@id/bgd_circ"
+        app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/settings_background_rectangle" />
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/bgd_rec"
-        app:layout_constraintStart_toStartOf="@+id/bgd_rec"
-        app:layout_constraintTop_toTopOf="@+id/bgd_rec">
+        app:layout_constraintBottom_toBottomOf="@id/bgd_rec"
+        app:layout_constraintEnd_toEndOf="@id/bgd_rec"
+        app:layout_constraintStart_toStartOf="@id/bgd_rec"
+        app:layout_constraintTop_toTopOf="@id/bgd_rec">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,7 +73,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
                 android:orientation="horizontal">
                 <ImageButton
                     android:id="@+id/btn_map"
@@ -65,6 +95,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/li_lay_chang_lang"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
@@ -81,11 +112,11 @@
                     android:id="@+id/str_btn_region"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
                     android:fontFamily="@font/roboto"
                     android:text="@string/stg_language"
                     android:textColor="@color/black"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
                     android:textSize="17sp" />
             </LinearLayout>
 
@@ -187,34 +218,5 @@
 
         </LinearLayout>
     </ScrollView>
-
-    <ImageButton
-        android:id="@+id/btn_left_arrow"
-        android:layout_width="10dp"
-        android:layout_height="14dp"
-        android:layout_marginStart="10dp"
-        android:background="@null"
-        android:onClick="returnHome"
-        app:layout_constraintBottom_toBottomOf="@+id/str_settings"
-        app:layout_constraintStart_toStartOf="@+id/bgd_rec"
-        app:layout_constraintTop_toTopOf="@+id/str_settings"
-        app:srcCompat="@drawable/settings_icon_left_arrow" />
-
-    <TextView
-        android:id="@+id/str_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/roboto"
-        android:outlineAmbientShadowColor="#801717"
-        android:outlineSpotShadowColor="#880808"
-        android:shadowColor="#B12323"
-        android:text="@string/stg_settings"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/bgd_circ"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bgd_circ" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

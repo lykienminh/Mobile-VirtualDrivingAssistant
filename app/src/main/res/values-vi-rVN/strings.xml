@@ -32,4 +32,8 @@
     <string name="location">Vị trí</string>
     <string name="speed">Tốc độ</string>
     <string name="traffic_sign">Biển báo giao thông</string>
+    <string name="str_hp_sign_recognition">Nhận diện\nbiển báo</string>
+    <string name="str_welcome_vda">Trợ lý lái xe</string>
+    <string name="str_welcome_description">Tìm địa điểm và tuyến đường của bạn một cách\ndễ dàng và thuận tiện. Phát hiện các biển báo\ngiao thông bằng công nghệ AR.</string>
+    <string name="str_get_started">Bắt đầu</string>
 </resources>

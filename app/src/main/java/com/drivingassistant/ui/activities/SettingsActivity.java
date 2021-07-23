@@ -10,7 +10,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.drivingassistant.R;
 
@@ -24,7 +24,7 @@ public class SettingsActivity extends AppCompatActivity {
         loadLocale();
         setContentView(R.layout.activity_settings);
 
-        ImageButton changLang = findViewById(R.id.btn_region);
+        LinearLayout changLang = findViewById(R.id.li_lay_chang_lang);
         changLang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

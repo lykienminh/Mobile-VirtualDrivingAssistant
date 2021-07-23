@@ -1,4 +1,4 @@
-    <?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,16 +10,18 @@
 
     <ImageView
         android:id="@+id/bgd_rect"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/homepage_bgd_rect" />
 
     <ImageView
         android:id="@+id/bgd_cloud"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/bgd_rect"
         app:layout_constraintStart_toStartOf="@+id/bgd_rect"
         app:layout_constraintTop_toTopOf="@+id/bgd_rect"
         app:srcCompat="@drawable/homepage_bgd_cloud" />
@@ -28,7 +30,7 @@
         android:id="@+id/logo_kime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgd_rect"
         app:layout_constraintEnd_toEndOf="@+id/bgd_rect"
         app:layout_constraintStart_toStartOf="@id/bgd_rect"
         app:layout_constraintTop_toTopOf="@+id/bgd_rect"
@@ -48,65 +50,74 @@
         app:layout_constraintTop_toBottomOf="@+id/logo_kime"
         app:srcCompat="@drawable/homepage_bg_traffic" />
 
+    <LinearLayout
+        android:id="@+id/li_lay_content_btn_hp_maps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="38dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_hp_maps"
+        app:layout_constraintStart_toStartOf="@+id/btn_hp_maps">
+
+        <ImageView
+            android:id="@+id/hp_icon_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            app:srcCompat="@drawable/homepage_icon_placeholder" />
+
+        <TextView
+            android:id="@+id/str_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="@string/stg_map"
+            android:textColor="#007AAF"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
     <ImageButton
         android:id="@+id/btn_hp_signs"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="17dp"
+        android:layout_marginEnd="16dp"
         android:background="@null"
         android:onClick="openSignDetect"
         app:layout_constraintEnd_toEndOf="@id/bgd_rect"
         app:layout_constraintTop_toTopOf="@+id/btn_hp_maps"
         app:srcCompat="@drawable/homepage_bg_signs"  />
 
-
-    <ImageView
-        android:id="@+id/hp_icon_placeholder"
+    <LinearLayout
+        android:id="@+id/li_lay_content_btn_hp_signs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
-        app:layout_constraintBottom_toTopOf="@+id/str_map"
-        app:layout_constraintStart_toStartOf="@+id/str_map"
-        app:srcCompat="@drawable/homepage_icon_placeholder" />
-
-    <ImageView
-        android:id="@+id/hp_icon_ar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
-        app:layout_constraintBottom_toTopOf="@+id/str_ar"
-        app:layout_constraintStart_toStartOf="@+id/str_ar"
-        app:srcCompat="@drawable/homepage_icon_pedestrian_crossing" />
-
-
-    <TextView
-        android:id="@+id/str_map"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:text="Bản đồ"
-        android:textColor="#007AAF"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="38dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_hp_maps"
-        app:layout_constraintStart_toStartOf="@+id/btn_hp_maps" />
-
-
-    <TextView
-        android:id="@+id/str_ar"
-        android:layout_width="77dp"
-        android:layout_height="39dp"
-        android:fontFamily="@font/roboto"
-        android:text="Nhận diện biển báo"
-        android:textColor="#007AAF"
-        android:textSize="17sp"
-        android:textStyle="bold"
+        android:orientation="vertical"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_hp_signs"
-        app:layout_constraintStart_toStartOf="@+id/btn_hp_signs" />
+        app:layout_constraintStart_toStartOf="@+id/btn_hp_signs">
+
+        <ImageView
+            android:id="@+id/hp_icon_ar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            app:srcCompat="@drawable/homepage_icon_pedestrian_crossing" />
+
+        <TextView
+            android:id="@+id/str_ar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="@string/str_hp_sign_recognition"
+            android:textColor="#007AAF"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/li_lay_icon_bar"

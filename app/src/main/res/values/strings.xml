@@ -42,5 +42,9 @@
     <string name="location">Location</string>
     <string name="speed">Speed</string>
     <string name="traffic_sign">Traffic Sign</string>
+    <string name="str_hp_sign_recognition">Sign\nrecognition</string>
+    <string name="str_welcome_vda">Virtual Driving Assistant</string>
+    <string name="str_welcome_description">Find places and routes to your destination\neasily and conveniently with maps and\ndetect traffic signs with AR technology.</string>
+    <string name="str_get_started">Get started</string>
 
 </resources>
