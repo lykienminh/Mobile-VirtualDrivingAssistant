@@ -6,91 +6,143 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="4"
-    android:background="@drawable/bg_speed"
+    android:weightSum="3"
+    android:background="@drawable/about_us_2"
     tools:context=".ui.activities.LoginActivity">
 
-    <TextView
-        android:id="@+id/txt_create_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="265dp"
-        android:layout_marginTop="17dp"
-        android:text="+ Sign Up"
-        android:textColor="@color/teal_700"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
-        android:id="@+id/logo_kime"
-        android:layout_width="120dp"
-        android:layout_height="135dp"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="80dp"
+        android:id="@+id/logo_tr"
+        android:layout_width="169dp"
+        android:layout_height="76dp"
+        android:src="@drawable/logo_kime_transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/homepage_logo_kime" />
+        app:layout_constraintVertical_bias="0.1" />
+
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+        android:id="@+id/li_lay_icon_bar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="582dp"
-        android:background="@drawable/background_login"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:paddingLeft="37.7dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7.7dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Login"
+            android:textColor="#030303"
+            android:textSize="31.3sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Email or Username"
+            android:textColor="#909090"
+            android:textSize="13.3sp" />
+
+        <EditText
             android:id="@+id/edit_email"
-            android:hint="@string/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="44.3dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/roboto"
             android:inputType="textEmailAddress"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            app:met_textColorHint="@color/myTextColor"
-            app:met_baseColor="@color/myTextColor"
-            app:met_primaryColor="@color/myTextColor"
-            app:met_iconPadding="0dp"
-            android:background="@null"
-            android:drawableEnd="@drawable/ic_email">
+            android:maxLines="1"
+            android:textCursorDrawable="@drawable/ui_login_grey_cursor_color"
+            android:textSize="15sp" />
 
-        </com.rengwuxian.materialedittext.MaterialEditText>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="6.3dp"
+            android:layout_marginRight="44.3dp"
+            android:background="#BFBFBF" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30.3dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Password"
+            android:textColor="#909090"
+            android:textSize="13.3sp" />
+
+        <EditText
             android:id="@+id/edit_password"
-            android:hint="@string/password"
-            android:inputType="textPassword"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            app:met_textColorHint="@color/myTextColor"
-            app:met_baseColor="@color/myTextColor"
-            app:met_primaryColor="@color/myTextColor"
-            app:met_iconPadding="0dp"
-            android:background="@null"
-            android:drawableEnd="@drawable/ic_lock">
-        </com.rengwuxian.materialedittext.MaterialEditText>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/roboto"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textCursorDrawable="@drawable/ui_login_grey_cursor_color"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="6.3dp"
+            android:layout_marginRight="44.3dp"
+            android:background="#BFBFBF" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginRight="37.7dp"
+            android:background="@drawable/login_btn_login_bgd"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="554dp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_login"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="41dp"
-        android:layout_margin="16dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="242dp"
-        android:background="@color/teal_200"
-        android:text="LOGIN"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-    </Button>
+    <LinearLayout
+        android:id="@+id/txt_create_account_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95">
+
+        <TextView
+            android:id="@+id/txt_create_account_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have acccount?"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txt_create_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Register"
+            android:textColor="#007AAF"
+            android:textSize="18sp" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

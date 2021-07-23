@@ -1,70 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/bg_aboutus"
     tools:context=".ui.activities.AboutUsActivity">
 
-
     <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_gravity="center"
         android:src="@drawable/img_city"
-        android:layout_gravity="center"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
 
     <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:textSize="20sp"
         android:fontFamily="@font/roboto"
+        android:text="Virtual Driving Assistant"
         android:textColor="@color/black"
-        android:text="Virtual Driving Assistant"/>
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_gravity="center"
-        android:textSize="14sp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
-        android:textColor="@color/colorPrimary"
+        android:text="Find places and routes to your destination\neasily and conveniently with maps and\ndetect traffic signs with AR technology."
         android:textAlignment="center"
-        android:text="Find places and routes to your destination\neasily and conveniently with maps and\ndetect traffic signs with AR technology."/>
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_width="131dp"
+        android:layout_height="47dp"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/logo_transparent"/>
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="3dp"
+        android:src="@drawable/logo_transparent"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="11sp"
+        android:layout_marginTop="3dp"
         android:fontFamily="@font/roboto"
-        android:textColor="@color/colorPrimary"
+        android:text="Drive safely, live happily"
         android:textAlignment="center"
-        android:text="Drive safely, live happily"/>
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/btn_next"
-        android:textSize="14sp"
-        android:textAllCaps="false"
-        android:textColor="#0A58ED"
-        android:background="#fff"
-        android:layout_gravity="center"
-        android:onClick="toLogin">
-    </Button>
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/welcome_btn_background_1"
+        android:drawableLeft="@drawable/welcome_btn_1"
+        android:onClick="toLogin"
+        android:paddingStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

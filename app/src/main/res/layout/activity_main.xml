@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.activities.MainActivity">
 
 
     <ImageView
         android:id="@+id/bgd_rect"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,7 +18,7 @@
 
     <ImageView
         android:id="@+id/bgd_cloud"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@+id/bgd_rect"
         app:layout_constraintTop_toTopOf="@+id/bgd_rect"
@@ -33,41 +34,7 @@
         app:layout_constraintTop_toTopOf="@+id/bgd_rect"
         app:srcCompat="@drawable/homepage_logo_kime" />
 
-    <ImageButton
-        android:id="@+id/btn_hp_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="24dp"
-        android:background="@null"
-        android:onClick="returnHome"
-        app:layout_constraintStart_toStartOf="@+id/btn_hp_maps"
-        app:layout_constraintTop_toBottomOf="@+id/btn_hp_signs"
-        app:srcCompat="@drawable/homepage_icon_home" />
-maps
-    <ImageButton
-        android:id="@+id/btn_hp_history"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:onClick="openHistory"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_hp_home"
-        app:layout_constraintEnd_toStartOf="@+id/btn_hp_settings"
-        app:layout_constraintStart_toEndOf="@+id/btn_hp_home"
-        app:layout_constraintTop_toTopOf="@+id/btn_hp_home"
-        app:srcCompat="@drawable/homepage_icon_history" />
 
-    <ImageButton
-        android:id="@+id/btn_hp_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:background="@null"
-        android:onClick="openSettings"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_hp_history"
-        app:layout_constraintEnd_toEndOf="@+id/btn_hp_signs"
-        app:layout_constraintTop_toTopOf="@+id/btn_hp_history"
-        app:srcCompat="@drawable/homepage_icon_settings" />
 
     <ImageButton
         android:id="@+id/btn_hp_maps"
@@ -140,5 +107,74 @@ maps
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_hp_signs"
         app:layout_constraintStart_toStartOf="@+id/btn_hp_signs" />
+
+    <LinearLayout
+        android:id="@+id/li_lay_content_btn_hp_maps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="121dp"
+        tools:layout_editor_absoluteY="534dp">
+
+        <ImageView
+            android:id="@+id/hp_icon_placeholderr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            app:srcCompat="@drawable/homepage_icon_placeholder" />
+
+        <TextView
+            android:id="@+id/str_mapp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="Bản đồ"
+            android:textColor="#007AAF"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/li_lay_icon_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/btn_hp_signs"
+        app:layout_constraintStart_toStartOf="@id/btn_hp_maps"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95">
+
+        <ImageButton
+            android:id="@+id/btn_hp_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:onClick="returnHome"
+            app:srcCompat="@drawable/homepage_icon_home" />
+
+        <ImageButton
+            android:id="@+id/btn_hp_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@null"
+            android:onClick="openHistory"
+            app:srcCompat="@drawable/homepage_icon_history" />
+
+        <ImageButton
+            android:id="@+id/btn_hp_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:onClick="openSettings"
+            app:srcCompat="@drawable/homepage_icon_settings" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,7 +41,7 @@ public class SettingsActivity extends AppCompatActivity {
     private void showChangeLanguageDialog() {
         final String[] listItems = {"Vietnam", "English"};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(SettingsActivity.this);
-        mBuilder.setTitle("@string/stg_language");
+        mBuilder.setTitle(R.string.stg_language);
         mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

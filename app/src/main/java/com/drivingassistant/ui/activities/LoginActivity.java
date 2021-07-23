@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +43,7 @@ import retrofit2.Retrofit;
 public class LoginActivity extends FragmentActivity {
 
     TextView txt_create_account;
-    MaterialEditText edit_login_email, edit_login_password;
+    EditText edit_login_email, edit_login_password;
     Button btn_login;
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -57,8 +58,8 @@ public class LoginActivity extends FragmentActivity {
         iMyService = retrofitClient.create(IMyService.class);
 
         // Init View
-        edit_login_email = (MaterialEditText) findViewById(R.id.edit_email);
-        edit_login_password = (MaterialEditText) findViewById(R.id.edit_password);
+        edit_login_email = (EditText) findViewById(R.id.edit_email);
+        edit_login_password = (EditText) findViewById(R.id.edit_password);
 
         btn_login = (Button) findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
