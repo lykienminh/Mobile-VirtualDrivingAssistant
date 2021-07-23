@@ -13,12 +13,10 @@ public class AboutUsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aboutus);
-
-
     }
 
     public void toLogin(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 }
