@@ -49,5 +49,8 @@
     <string name="str_vda_slogan" translatable="false">Drive safely, live happily</string>
     <string name="str_info_version">App version: 1.0</string>
     <string name="str_info_contact">Contact: support.vda@kime.vn</string>
+    <string name="str_lang_en">English</string>
+    <string name="str_lang_vi">Vietnam</string>
+    <string name="str_select_lang">Select language</string>
 
 </resources>

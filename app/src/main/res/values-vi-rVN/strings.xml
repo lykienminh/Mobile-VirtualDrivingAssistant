@@ -38,4 +38,7 @@
     <string name="str_get_started">Bắt đầu</string>
     <string name="str_info_version">Phiên bản ứng dụng: 1.0</string>
     <string name="str_info_contact">Liên hệ: support.vda@kime.vn</string>
+    <string name="str_lang_en">Tiếng Anh</string>
+    <string name="str_lang_vi">Tiếng Việt</string>
+    <string name="str_select_lang">Chọn ngôn ngữ</string>
 </resources>

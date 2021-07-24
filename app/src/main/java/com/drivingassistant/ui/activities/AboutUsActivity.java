@@ -20,27 +20,48 @@ public class AboutUsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences firstUse = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String isFirstUse = firstUse.getString("firstUse", "Not use");
+
         loadLocale();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aboutus);
+        if(isFirstUse.equals("Not use")) {
+            SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+            editor.putString("firstUse", "Used");
+            editor.apply();
 
-        Button changLang = findViewById(R.id.btn_changLang);
-        changLang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showChangeLanguageDialog();
-            }
-        });
+            setContentView(R.layout.activity_aboutus);
+
+            Button changLang = findViewById(R.id.btn_changLang);
+            changLang.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+                    editor.putString("firstUse", "Not use");
+                    editor.apply();
+                    showChangeLanguageDialog();
+                }
+            });
+        }
+        else {
+            goHomepage();
+        }
+    }
+
+    public void goHomepage() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void toLogin(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
     private void showChangeLanguageDialog() {
-        final String[] listItems = {"Vietnam", "English"};
+        final String[] listItems = {"Tiếng Việt", "English"};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(AboutUsActivity.this);
-        mBuilder.setTitle(R.string.stg_language);
+        mBuilder.setTitle(R.string.str_select_lang);
         mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
