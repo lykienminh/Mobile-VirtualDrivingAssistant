@@ -54,7 +54,7 @@ public class AboutUsActivity extends AppCompatActivity {
     }
 
     public void toLogin(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
