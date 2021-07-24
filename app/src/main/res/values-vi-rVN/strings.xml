@@ -36,4 +36,6 @@
     <string name="str_welcome_vda">Trợ lý lái xe</string>
     <string name="str_welcome_description">Tìm địa điểm và tuyến đường của bạn một cách\ndễ dàng và thuận tiện. Phát hiện các biển báo\ngiao thông bằng công nghệ AR.</string>
     <string name="str_get_started">Bắt đầu</string>
+    <string name="str_info_version">Phiên bản ứng dụng: 1.0</string>
+    <string name="str_info_contact">Liên hệ: support.vda@kime.vn</string>
 </resources>

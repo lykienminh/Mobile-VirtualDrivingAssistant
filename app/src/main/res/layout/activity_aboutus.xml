@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/roboto"
-            android:text="Drive safely, live happily"
+            android:text="@string/str_vda_slogan"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="12sp" />

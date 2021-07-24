@@ -25,12 +25,21 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         LinearLayout changLang = findViewById(R.id.li_lay_chang_lang);
+        LinearLayout openInfo = findViewById(R.id.li_lay_info);
+
         changLang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showChangeLanguageDialog();
             }
         });
+
+        openInfo.setOnClickListener(v -> openSettingsInfo(v));
+    }
+
+    public void openSettingsInfo(View view) {
+        Intent intent = new Intent(this, SettingsInfo.class);
+        startActivity(intent);
     }
 
     public void returnHome(View view) {
