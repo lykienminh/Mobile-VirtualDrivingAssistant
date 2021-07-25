@@ -93,7 +93,7 @@ public abstract class CameraActivity extends AppCompatActivity
 //  private LinearLayout gestureLayout;
 //  private BottomSheetBehavior<LinearLayout> sheetBehavior;
 
-    protected TextView  cropValueTextView, inferenceTimeTextView;
+//    protected TextView  cropValueTextView, inferenceTimeTextView;
     //  protected ImageView bottomSheetArrowImageView;
     private ImageView plusImageView, minusImageView;
     private SwitchCompat apiSwitchCompat;
@@ -125,8 +125,8 @@ public abstract class CameraActivity extends AppCompatActivity
 
         txtCurrentSpeed = findViewById(R.id.currentSpeedTxt);
 
-        cropValueTextView = findViewById(R.id.crop_info);
-        inferenceTimeTextView = findViewById(R.id.inference_info);
+//        cropValueTextView = findViewById(R.id.crop_info);
+//        inferenceTimeTextView = findViewById(R.id.inference_info);
 
 
         plusImageView.setOnClickListener(this);
@@ -168,6 +168,7 @@ public abstract class CameraActivity extends AppCompatActivity
     @Override
     public void onLocationChanged(Location location) {
         if (location != null){
+            Log.wtf("Hoang", "Change location");
             CLocation myLocation = new CLocation(location, this.useMetricUnits());
             this.updateSpeed(myLocation);
         }
@@ -560,13 +561,13 @@ public abstract class CameraActivity extends AppCompatActivity
 //    frameValueTextView.setText(frameInfo);
 //  }
 
-    protected void showCropInfo(String cropInfo) {
-        cropValueTextView.setText(cropInfo);
-    }
+//    protected void showCropInfo(String cropInfo) {
+//        cropValueTextView.setText(cropInfo);
+//    }
 
-    protected void showInference(String inferenceTime) {
-        inferenceTimeTextView.setText(inferenceTime);
-    }
+//    protected void showInference(String inferenceTime) {
+//        inferenceTimeTextView.setText(inferenceTime);
+//    }
 
     protected abstract void processImage();
 

@@ -29,18 +29,17 @@ import android.util.Log;
 import android.util.Pair;
 import android.util.TypedValue;
 
+import com.drivingassistant.utils.env.BorderedText;
+import com.drivingassistant.utils.env.ImageUtils;
+import com.drivingassistant.utils.env.Logger;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-
-import com.drivingassistant.utils.GlobalData;
-import com.drivingassistant.utils.env.BorderedText;
-import com.drivingassistant.utils.env.ImageUtils;
-import com.drivingassistant.utils.env.Logger;
-import com.drivingassistant.tflite.detection.Classifier.Recognition;
+import org.tensorflow.lite.examples.detection.tflite.Detector.Recognition;
 
 import static java.lang.Long.parseLong;
 
@@ -232,3 +231,4 @@ public class MultiBoxTracker {
     String title;
   }
 }
+

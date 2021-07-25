@@ -1,2 +1,3 @@
+include ':lib_task_api'
 include ':app', ':tensorflow-lite'
 rootProject.name = "Driving Assistant"

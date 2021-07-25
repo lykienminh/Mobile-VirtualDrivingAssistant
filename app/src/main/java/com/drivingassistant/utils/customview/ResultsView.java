@@ -15,10 +15,11 @@ limitations under the License.
 
 package com.drivingassistant.utils.customview;
 
-import com.drivingassistant.tflite.detection.Classifier.Recognition;
+
+import org.tensorflow.lite.examples.detection.tflite.Detector;
 
 import java.util.List;
 
 public interface ResultsView {
-  public void setResults(final List<Recognition> results);
+  public void setResults(final List<Detector.Recognition> results);
 }

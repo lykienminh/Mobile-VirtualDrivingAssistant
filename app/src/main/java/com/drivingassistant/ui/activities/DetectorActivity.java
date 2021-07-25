@@ -42,8 +42,9 @@ import com.drivingassistant.utils.customview.OverlayView.DrawCallback;
 import com.drivingassistant.utils.env.BorderedText;
 import com.drivingassistant.utils.env.ImageUtils;
 import com.drivingassistant.utils.env.Logger;
-import com.drivingassistant.tflite.detection.Classifier;
-import com.drivingassistant.tflite.detection.TFLiteObjectDetectionAPIModel;
+//import com.drivingassistant.tflite.detection.TFLiteObjectDetectionAPIModel;
+import org.tensorflow.lite.examples.detection.tflite.TFLiteObjectDetectionAPIModel;
+import org.tensorflow.lite.examples.detection.tflite.Detector;
 import com.drivingassistant.tflite.tracking.MultiBoxTracker;
 
 /**
@@ -68,7 +69,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     OverlayView trackingOverlay;
     private Integer sensorOrientation;
 
-    private Classifier detector;
+    private Detector detector;
 
     private long lastProcessingTimeMs;
     private Bitmap rgbFrameBitmap = null;
@@ -183,7 +184,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     public void run() {
                         LOGGER.i("Running detection on image " + currTimestamp);
                         final long startTime = SystemClock.uptimeMillis();
-                        final List<Classifier.Recognition> results = detector.recognizeImage(croppedBitmap);
+                        final List<Detector.Recognition> results = detector.recognizeImage(croppedBitmap);
                         lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
 
                         cropCopyBitmap = Bitmap.createBitmap(croppedBitmap);
@@ -201,10 +202,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                 break;
                         }
 
-                        final List<Classifier.Recognition> mappedRecognitions =
-                                new ArrayList<Classifier.Recognition>();
+                        final List<Detector.Recognition> mappedRecognitions =
+                                new ArrayList<Detector.Recognition>();
 
-                        for (final Classifier.Recognition result : results) {
+                        for (final Detector.Recognition result : results) {
                             final RectF location = result.getLocation();
                             if (location != null && result.getConfidence() >= minimumConfidence) {
 //                canvas.drawRect(location, paint);
@@ -222,15 +223,15 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
                         computingDetection = false;
 
-                        runOnUiThread(
-                                new Runnable() {
-                                    @Override
-                                    public void run() {
-//                    showFrameInfo(previewWidth + "x" + previewHeight);
-                                        showCropInfo(cropCopyBitmap.getWidth() + "x" + cropCopyBitmap.getHeight());
-                                        showInference(lastProcessingTimeMs + "ms");
-                                    }
-                                });
+//                        runOnUiThread(
+//                                new Runnable() {
+//                                    @Override
+//                                    public void run() {
+////                    showFrameInfo(previewWidth + "x" + previewHeight);
+//                                        showCropInfo(cropCopyBitmap.getWidth() + "x" + cropCopyBitmap.getHeight());
+//                                        showInference(lastProcessingTimeMs + "ms");
+//                                    }
+//                                });
                     }
                 });
     }

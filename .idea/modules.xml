@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Driving_Assistant.iml" filepath="$PROJECT_DIR$/.idea/modules/Driving_Assistant.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Driving_Assistant.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Driving_Assistant.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_task_api/Driving_Assistant.lib_task_api.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_task_api/Driving_Assistant.lib_task_api.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tensorflow-lite/Driving_Assistant.tensorflow-lite.iml" filepath="$PROJECT_DIR$/.idea/modules/tensorflow-lite/Driving_Assistant.tensorflow-lite.iml" />
     </modules>
   </component>
