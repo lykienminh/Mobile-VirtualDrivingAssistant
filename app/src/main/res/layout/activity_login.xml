@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="7.7dp"
             android:fontFamily="sans-serif-medium"
-            android:text="Login"
+            android:text="@string/str_login"
             android:textColor="#030303"
             android:textSize="32sp" />
 
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:fontFamily="sans-serif-medium"
-            android:text="Email or Username"
+            android:text="@string/str_login_username"
             android:textColor="#909090"
             android:textSize="16sp" />
 
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30.3dp"
             android:fontFamily="sans-serif-medium"
-            android:text="Password"
+            android:text="@string/str_login_password"
             android:textColor="#909090"
             android:textSize="16sp" />
 
@@ -106,7 +106,7 @@
             android:layout_marginTop="45dp"
             android:layout_marginRight="37.7dp"
             android:background="@drawable/login_btn_login_bgd"
-            android:text="Login"
+            android:text="@string/str_login"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -130,7 +130,7 @@
             android:id="@+id/txt_create_account_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Don't have acccount?"
+            android:text="@string/str_login_register_1"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:fontFamily="sans-serif-black"
-            android:text="Register"
+            android:text="@string/str_login_register_2"
             android:textColor="#007AAF"
             android:textSize="18sp" />
     </LinearLayout>

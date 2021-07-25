@@ -2,11 +2,15 @@
   <library name="Gradle: androidx.core:core:1.1.0@aar">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4f525255957008cba8f08f26857a7324/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/78e031ca16b69aa0608d9c6b87136f90/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4f525255957008cba8f08f26857a7324/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4f525255957008cba8f08f26857a7324/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4f525255957008cba8f08f26857a7324/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/78e031ca16b69aa0608d9c6b87136f90/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/78e031ca16b69aa0608d9c6b87136f90/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/78e031ca16b69aa0608d9c6b87136f90/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

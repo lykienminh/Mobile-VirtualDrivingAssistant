@@ -25,7 +25,7 @@
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/edit_name"
-        android:hint="Name"
+        android:hint="@string/name"
         android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -41,7 +41,7 @@
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/edit_password"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"

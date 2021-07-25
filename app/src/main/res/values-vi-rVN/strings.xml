@@ -41,4 +41,17 @@
     <string name="str_lang_en">Tiếng Anh</string>
     <string name="str_lang_vi">Tiếng Việt</string>
     <string name="str_select_lang">Chọn ngôn ngữ</string>
+    <string name="str_login">Đăng nhập</string>
+    <string name="str_login_username">Email hoặc tên người dùng</string>
+    <string name="str_login_password">Mật khẩu</string>
+    <string name="str_login_register_1">Không có tài khoản?</string>
+    <string name="str_login_register_2">Đăng ký</string>
+    <string name="str_register_registration">ĐĂNG KÝ</string>
+    <string name="str_register_note">Vui lòng điền tất cả các trường</string>
+    <string name="str_register_cancel">HUỶ</string>
+    <string name="str_register">ĐĂNG KÝ</string>
+    <string name="str_register_warn_email">Vui lòng nhập email</string>
+    <string name="str_register_warn_name">Vui lòng nhập tên</string>
+    <string name="str_register_warn_password">Vui lòng nhập mật khẩu</string>
+    <string name="str_login_hello">"Xin chào, "</string>
 </resources>

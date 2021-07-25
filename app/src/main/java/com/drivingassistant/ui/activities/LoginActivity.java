@@ -2,6 +2,8 @@ package com.drivingassistant.ui.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -33,6 +35,8 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.json.JSONObject;
 
+import java.util.Locale;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -51,6 +55,7 @@ public class LoginActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        loadLocale();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Init Service
@@ -79,14 +84,14 @@ public class LoginActivity extends FragmentActivity {
 
                 new MaterialStyledDialog.Builder(LoginActivity.this)
                         .setIcon(R.drawable.ic_user)
-                        .setTitle("REGISTRATION")
-                        .setDescription("Please fill all fields")
+                        .setTitle(R.string.str_register_registration)
+                        .setDescription(R.string.str_register_note)
                         .setCustomView(register_layout)
-                        .setNegativeText("CANCEL")
+                        .setNegativeText(R.string.str_register_cancel)
                         .onNegative((dialog, which) -> {
                             dialog.dismiss();
                         })
-                        .setPositiveText("REGISTER")
+                        .setPositiveText(R.string.str_register)
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -96,19 +101,19 @@ public class LoginActivity extends FragmentActivity {
 
                                 if (TextUtils.isEmpty(edit_register_email.getText()))
                                 {
-                                    Toast.makeText(LoginActivity.this, "Email cannot be null or empty", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, R.string.str_register_warn_email, Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (TextUtils.isEmpty(edit_register_name.getText()))
                                 {
-                                    Toast.makeText(LoginActivity.this, "Name cannot be null or empty", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, R.string.str_register_warn_name, Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (TextUtils.isEmpty(edit_register_password.getText()))
                                 {
-                                    Toast.makeText(LoginActivity.this, "Password cannot be null or empty", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, R.string.str_register_warn_password, Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
@@ -140,13 +145,13 @@ public class LoginActivity extends FragmentActivity {
     private void loginUser(String email, String password) {
         if (TextUtils.isEmpty(email))
         {
-            Toast.makeText(LoginActivity.this, "Email cannot be null or empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, R.string.str_register_warn_email, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (TextUtils.isEmpty(password))
         {
-            Toast.makeText(LoginActivity.this, "Password cannot be null or empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, R.string.str_register_warn_password, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -163,10 +168,27 @@ public class LoginActivity extends FragmentActivity {
                             return;
                         }
                         String name = jsonResponse.getString("name");
-                        Toast.makeText(LoginActivity.this, "Hello, " + name + "!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, R.string.str_login_hello + name + "!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     }
                 }));
+    }
+    private void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("MyLang", lang);
+        editor.apply();
+    }
+
+    public void loadLocale(){
+        SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String lang = prefs.getString("MyLang", "");
+        setLocale(lang);
     }
 }
