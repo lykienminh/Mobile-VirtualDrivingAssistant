@@ -36,14 +36,8 @@ public class MyLocationService extends BroadcastReceiver {
                     String latitude = Double.toString(location.getLatitude());
                     String longitude = Double.toString(location.getLongitude());
 
-                    // seconds passed since the Unix epoch time (midnight of January 1, 1970 UTC)
-                    Instant now = Instant.now();
-                    // convert Instant to LocalDateTime
-                    LocalDateTime localDateTime = LocalDateTime.ofInstant(now, ZoneId.systemDefault());
-                    String time = dtfDateTime.format(localDateTime);
-                    Log.wtf("khang", time);
                     try{
-                        MapActivity.getInstance().sendHistory("", latitude, longitude, "", time);
+                        MapActivity.getInstance().sendHistory("", latitude, longitude, "");
                     }
                     catch (Exception ex){
                         ex.printStackTrace();

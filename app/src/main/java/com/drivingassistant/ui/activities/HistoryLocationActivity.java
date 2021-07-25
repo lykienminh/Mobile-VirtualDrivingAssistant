@@ -98,6 +98,7 @@ public class HistoryLocationActivity extends AppCompatActivity {
             // Initialize hash map
             HashMap<String, String> hashMapList = mapList.get(i);
             // Get location
+            Log.wtf("khangne", hashMapList.toString());
             String latitude = hashMapList.get("latitude");
             String longitude = hashMapList.get("longitude");
             String created_at = hashMapList.get("created_at");

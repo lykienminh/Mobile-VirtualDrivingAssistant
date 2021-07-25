@@ -23,8 +23,7 @@ public interface IMyService {
     Observable<String> sendHistory(@Field("speed") String speed,
                                    @Field("latitude") String latitude,
                                    @Field("longitude") String longitude,
-                                   @Field("traffic_sign") String traffic_sign,
-                                   @Field("created_at") String created_at);
+                                   @Field("traffic_sign") String traffic_sign);
 
     @POST("result")
     @FormUrlEncoded

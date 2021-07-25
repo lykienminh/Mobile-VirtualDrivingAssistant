@@ -138,6 +138,7 @@ public class LoginActivity extends FragmentActivity {
                         JSONObject jsonResponse = new JSONObject(response);
                         String result = jsonResponse.getString("result");
                         Toast.makeText(LoginActivity.this, "" + result, Toast.LENGTH_SHORT).show();
+                        loginUser(email, password);
                     }
                 }));
     }
@@ -163,7 +164,7 @@ public class LoginActivity extends FragmentActivity {
                     public void accept(String response) throws Exception {
                         JSONObject jsonResponse = new JSONObject(response);
                         String result = jsonResponse.getString("result");
-                        if(result.compareTo("Login success") != 0){
+                        if(result.compareTo("Login success!") != 0){
                             Toast.makeText(LoginActivity.this, "" + result, Toast.LENGTH_SHORT).show();
                             return;
                         }
