@@ -22,6 +22,38 @@
     <string name="hotel_icon">Hotels</string>
     <string name="coffee_icon">Coffee</string>
     <string name="more_icon">More</string>
-    <string name="tfe_od_camera_error" translation_description="Error regarding camera support[CHAR_LIMIT=40]">This device doesn\'t support Camera2 API.</string>
+    <string name="tfe_od_camera_error" translation_description="Error regarding camera support[CHAR_LIMIT=40]" translatable="false">This device doesn\'t support Camera2 API.</string>
+
+    <string name="current_distance">Current\ndistance</string>
+    <string name="total_distance">Total\ndistance</string>
+    <string name="sign_detected">Detected signs</string>
+    <string name="inference_time">Inference time</string>
+    <string name="satellite">Satellite</string>
+    <string name="gps_status">GPS status</string>
+    <string name="gps_accuracy">GPS accuracy</string>
+    <string name="threads">Threads</string>
+    <string name="confidence">Confidence</string>
+    <string name="sign_noti">Notification</string>
+    <string name="btn_next" translatable="false">Next</string>
+    <string name="history_time">Recording time</string>
+    <string name="history_location">Location</string>
+    <string name="history_speed">Speed</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="location">Location</string>
+    <string name="speed">Speed</string>
+    <string name="traffic_sign">Traffic Sign</string>
+    <string name="str_hp_sign_recognition">Sign\nrecognition</string>
+    <string name="str_welcome_vda">Virtual Driving Assistant</string>
+    <string name="str_welcome_description">Find places and routes to your destination\neasily and conveniently with maps and\ndetect traffic signs with AR technology.</string>
+    <string name="str_get_started">Get started</string>
+    <string name="str_vda_slogan" translatable="false">Drive safely, live happily</string>
+    <string name="str_info_version">App version: 1.0</string>
+    <string name="str_info_contact">Contact: support.vda@kime.vn</string>
+    <string name="str_lang_en">English</string>
+    <string name="str_lang_vi">Vietnam</string>
+    <string name="str_select_lang">Select language</string>
+>>>>>>> 475aa80390e94c710f51d72cb6b1f8f89fc8e595
 
 </resources>

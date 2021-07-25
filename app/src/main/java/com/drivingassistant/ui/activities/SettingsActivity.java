@@ -10,7 +10,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.drivingassistant.R;
 
@@ -24,13 +24,22 @@ public class SettingsActivity extends AppCompatActivity {
         loadLocale();
         setContentView(R.layout.activity_settings);
 
-        ImageButton changLang = findViewById(R.id.btn_region);
+        LinearLayout changLang = findViewById(R.id.li_lay_chang_lang);
+        LinearLayout openInfo = findViewById(R.id.li_lay_info);
+
         changLang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showChangeLanguageDialog();
             }
         });
+
+        openInfo.setOnClickListener(v -> openSettingsInfo(v));
+    }
+
+    public void openSettingsInfo(View view) {
+        Intent intent = new Intent(this, SettingsInfo.class);
+        startActivity(intent);
     }
 
     public void returnHome(View view) {
@@ -41,7 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
     private void showChangeLanguageDialog() {
         final String[] listItems = {"Vietnam", "English"};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(SettingsActivity.this);
-        mBuilder.setTitle("@string/stg_language");
+        mBuilder.setTitle(R.string.str_select_lang);
         mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

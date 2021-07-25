@@ -6,7 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -19,6 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
+        <receiver
+            android:name=".ui.retrofit.MyLocationService"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -30,20 +33,23 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".ui.activities.MainActivity">
+        <activity android:name=".ui.activities.AboutUsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.activities.SettingsActivity"/>
+        <activity android:name=".ui.activities.LoginActivity" />
+        <activity android:name=".ui.activities.MainActivity" />
+        <activity android:name=".ui.activities.SettingsActivity" />
         <activity android:name=".ui.activities.MapActivity" />
-        <activity android:name=".ui.activities.ServiceActivity"/>
-        <activity android:name=".ui.activities.CameraActivity"/>
-        <activity android:name=".ui.activities.DetectorActivity"/>
-        <activity android:name=".ui.activities.AboutUsActivity"/>
-        <activity android:name=".ui.activities.TrafficActivity"/>
+        <activity android:name=".ui.activities.ServiceActivity" />
+        <activity android:name=".ui.activities.CameraActivity" />
+        <activity android:name=".ui.activities.DetectorActivity" />
+        <activity android:name=".ui.activities.HistoryActivity" />
+        <activity android:name=".ui.activities.HistoryLocationActivity" />
+        <activity android:name=".ui.activities.SettingsInfo"/>
     </application>
 
 </manifest>

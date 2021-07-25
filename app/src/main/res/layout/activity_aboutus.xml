@@ -1,88 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/bg_aboutus"
     tools:context=".ui.activities.AboutUsActivity">
 
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:rowCount="1"
-        android:columnCount="2">
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/img_city"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15" />
 
-        <ImageButton
-            android:id="@+id/btn_left_arrow"
-            android:layout_width="10dp"
-            android:background="@null"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="32dp"
-            android:onClick="returnHome"
-            app:srcCompat="@drawable/ic_left_arrow" />
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/str_welcome_vda"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/str_welcome_description"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+
+    <LinearLayout
+        android:id="@+id/li_lay_welcome_logo_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btn_changLang"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="131dp"
+            android:layout_height="47dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="1dp"
+            android:src="@drawable/logo_transparent" />
 
         <TextView
-            android:id="@+id/str_aboutus"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="90dp"
-            android:layout_marginTop="24dp"
+            android:layout_gravity="center"
             android:fontFamily="@font/roboto"
-            android:text="Giới thiệu"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:text="@string/str_vda_slogan"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp" />
 
-    </GridLayout>
+    </LinearLayout>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/img_city"
-        android:layout_gravity="center"/>
+    <Button
+        android:id="@+id/btn_changLang"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/welcome_btn_chang_lang_bgd"
+        android:fontFamily="sans-serif"
+        android:text="@string/stg_language"
+        android:textAllCaps="false"
+        android:textColor="#003046"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@id/btn_getStarted"
+        app:layout_constraintStart_toStartOf="@id/btn_getStarted"
+        app:layout_constraintBottom_toTopOf="@+id/btn_getStarted" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:textSize="20sp"
-        android:fontFamily="@font/roboto"
-        android:textColor="@color/black"
-        android:text="Virtual Driving Assistant"/>
+    <Button
+        android:id="@+id/btn_getStarted"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@drawable/welcome_btn_chang_lang_bgd"
+        android:onClick="toLogin"
+        android:fontFamily="sans-serif"
+        android:text="@string/str_get_started"
+        android:textAllCaps="false"
+        android:textColor="#003046"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/imageView3"
+        app:layout_constraintStart_toStartOf="@id/imageView3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:textSize="14sp"
-        android:fontFamily="@font/roboto"
-        android:textColor="@color/colorPrimary"
-        android:textAlignment="center"
-        android:text="Lorem ipsum dolor sit amet, cu usu velit\n
-civibus, cu augue paulo senserit usu. Eius\n
-facilis nostrum et cum, vix ut porro nobis\n
-posidonium, animal tacimates usu at."/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:src="@drawable/logo_transparent"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="11sp"
-        android:fontFamily="@font/roboto"
-        android:textColor="@color/colorPrimary"
-        android:textAlignment="center"
-        android:text="Drive safely, live happily"/>
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

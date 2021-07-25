@@ -1,0 +1,22 @@
+<component name="libraryTable">
+  <library name="Gradle: com.karumi:dexter:5.0.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1c481e769d2ea20a1fe6242676209aa1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1c481e769d2ea20a1fe6242676209aa1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1c481e769d2ea20a1fe6242676209aa1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/efe009c04b30b497f11539fed3072227/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/efe009c04b30b497f11539fed3072227/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/efe009c04b30b497f11539fed3072227/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/63bb50b916a0030b6bc932952a79923c/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/63bb50b916a0030b6bc932952a79923c/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/63bb50b916a0030b6bc932952a79923c/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/797b870ef80e158be06ca342e6939627/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/797b870ef80e158be06ca342e6939627/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/797b870ef80e158be06ca342e6939627/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.karumi/dexter/5.0.0/c2d1f7314d3761008b381eb349bba66d8dcc3018/dexter-5.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
