@@ -10,10 +10,12 @@
         android:id="@+id/bgd_rec_grad"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/settings_info_bgd_gradient" />
 
     <TextView
@@ -47,7 +49,17 @@
         app:layout_constraintTop_toTopOf="@+id/str_settings"
         app:srcCompat="@drawable/settings_icon_left_arrow" />
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/bgd_rec_rec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/info_gif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/settings_info_bgd_obj" />
+
+    <!--LinearLayout
         android:id="@+id/li_lay_rec_obj"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,14 +82,14 @@
             android:background="@color/white"
             app:srcCompat="@drawable/settings_info_bgd_obj" />
 
-    </LinearLayout>
+    </LinearLayout-->
 
 
     <ImageView
         android:id="@+id/info_gif"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
-        app:layout_constraintBottom_toBottomOf="@+id/li_lay_stg_info_ver_cont"
+        app:layout_constraintBottom_toTopOf="@+id/li_lay_stg_info_ver_cont"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/bgd_rec_grad"
