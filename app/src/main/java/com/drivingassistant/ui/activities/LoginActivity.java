@@ -138,7 +138,6 @@ public class LoginActivity extends FragmentActivity {
                         JSONObject jsonResponse = new JSONObject(response);
                         String result = jsonResponse.getString("result");
                         Toast.makeText(LoginActivity.this, "" + result, Toast.LENGTH_SHORT).show();
-                        loginUser(email, password);
                     }
                 }));
     }
