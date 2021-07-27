@@ -19,22 +19,23 @@
             android:layout_height="match_parent" />
 
         <SearchView
+            android:id="@+id/sv_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/sv_location"
+            android:layout_margin="15dp"
+            android:background="@drawable/background_search_bar"
             android:elevation="5dp"
             android:fontFamily="@font/roboto"
-            android:queryHint="@string/search_view"
             android:iconifiedByDefault="false"
-            android:textSize="15sp"
-            android:layout_margin="15dp"
-            android:background="@drawable/background_search_bar">
+            android:queryHint="@string/search_view"
+            android:textSize="15sp">
         </SearchView>
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fillViewport="true" >
+            android:fillViewport="true"
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -115,33 +116,44 @@
             </LinearLayout>
         </HorizontalScrollView>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="300dp"
-            android:layout_marginTop="200dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <ImageButton
-                android:id="@+id/btn_traffic_mode"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/btn_traffic_mode"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.93"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.93">
 
-            <ImageButton
-                android:id="@+id/btn_gps"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/btn_gps"/>
+                <ImageButton
+                    android:id="@+id/btn_traffic_mode"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/btn_traffic_mode" />
 
-            <ImageButton
-                android:id="@+id/btn_direction"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/btn_go" />
+                <ImageButton
+                    android:id="@+id/btn_gps"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/btn_gps" />
 
-        </LinearLayout>
+                <ImageButton
+                    android:id="@+id/btn_direction"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/btn_go" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,12 @@
 package com.drivingassistant.ui.activities;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -74,6 +77,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -105,6 +109,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     private static final DateTimeFormatter dtfDateTime = DateTimeFormatter.ofPattern("MM/dd/uuuu HH:mm:ss");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        loadLocale();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         instance = this;
@@ -345,7 +350,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
                             // Add marker on map
                             map.addMarker(options);
-                            map.getUiSettings().setZoomControlsEnabled(true);
+                            map.getUiSettings().setZoomControlsEnabled(false);
                             map.getUiSettings().setMyLocationButtonEnabled(true);
                         }
                     });
@@ -530,5 +535,22 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 map.addMarker(options);
             }
         }
+    }
+    private void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("MyLang", lang);
+        editor.apply();
+    }
+
+    public void loadLocale(){
+        SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String lang = prefs.getString("MyLang", "");
+        setLocale(lang);
     }
 }
