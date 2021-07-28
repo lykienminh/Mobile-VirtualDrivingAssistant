@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.drivingassistant.R;
 import com.drivingassistant.ui.adapter.LocationListAdapter;
@@ -124,9 +125,14 @@ public class HistoryLocationActivity extends AppCompatActivity {
             Log.wtf("khang", formattedTime);
             listLocation.add(new UserLocation(i + 1, location, formattedTime));
         }
-        locationListAdapter = new LocationListAdapter(listLocation);
-        listViewLocation = (ListView) findViewById(R.id.listproduct);
-        listViewLocation.setAdapter(locationListAdapter);
+        if (mapList.size() != 0) {
+            locationListAdapter = new LocationListAdapter(listLocation);
+            listViewLocation = (ListView) findViewById(R.id.listproduct);
+            listViewLocation.setAdapter(locationListAdapter);
+        }
+        else{
+            Toast.makeText(HistoryLocationActivity.this, "You don't go anywhere today!", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 

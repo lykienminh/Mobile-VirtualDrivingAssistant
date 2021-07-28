@@ -31,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openLogin(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
     public void returnHome(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

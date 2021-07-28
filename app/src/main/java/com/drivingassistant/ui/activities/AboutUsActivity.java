@@ -53,11 +53,6 @@ public class AboutUsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void toLogin(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
-
     private void showChangeLanguageDialog() {
         final String[] listItems = {"Tiếng Việt", "English"};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(AboutUsActivity.this);
