@@ -18,6 +18,14 @@ public class GlobalData {
     public int appear_time = 3;
     public int number_sign = 28;
     public Integer[] sign_counter;
+    public String[] MAP_SIGN_TO_LABEL = {
+            "No entry",
+            "No parking / waiting",
+            "No turning",
+            "Max Speed",
+            "Other prohibition signs",
+            "Warning",
+            "Mandatory"};
 
     private static GlobalData INSTANCE;
 

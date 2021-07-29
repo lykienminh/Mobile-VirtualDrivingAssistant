@@ -29,6 +29,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.util.TypedValue;
 
+import com.drivingassistant.utils.GlobalData;
 import com.drivingassistant.utils.env.BorderedText;
 import com.drivingassistant.utils.env.ImageUtils;
 import com.drivingassistant.utils.env.Logger;
@@ -153,7 +154,7 @@ public class MultiBoxTracker {
 
       final String labelString =
               !TextUtils.isEmpty(recognition.title)
-                      ? String.format("%s %.2f", recognition.title, (100 * recognition.detectionConfidence))
+                      ? String.format("%s %.2f", GlobalData.getInstance().MAP_SIGN_TO_LABEL[Integer.parseInt(recognition.title)], (100 * recognition.detectionConfidence))
                       : String.format("%.2f", (100 * recognition.detectionConfidence));
       //            borderedText.drawText(canvas, trackedPos.left + cornerSize, trackedPos.top,
       // labelString);
