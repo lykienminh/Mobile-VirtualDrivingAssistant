@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/mainFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Map Fragment embedded with the map object -->
+        <fragment
+            android:id="@+id/mapfragment"
+            class="com.here.android.mpa.mapping.AndroidXMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:id="@+id/settingsPanelLayout"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/dim_foreground_disabled_material_light"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/schemes"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:paddingTop="@dimen/abc_action_bar_subtitle_bottom_margin_material"
+                android:text="Loại bản đồ"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#fffcfc"/>
+
+            <RadioGroup
+                android:id="@+id/mapModeRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                android:orientation="horizontal"
+                android:paddingTop="1dp">
+
+                <RadioButton
+                    android:id="@+id/mapModeBtn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/generic_button_bar_i"
+                    android:button="@null"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Bình thường"/>
+
+                <RadioButton
+                    android:id="@+id/hybridModeBtn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/generic_button_bar_i"
+                    android:button="@null"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Vệ tinh"/>
+
+                <RadioButton
+                    android:id="@+id/terrainModeBtn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/generic_button_bar_i"
+                    android:button="@null"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Địa hình"/>
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/settingButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="right|bottom"
+            android:layout_margin="20dp"
+            android:background="@drawable/settingbutton"
+            android:gravity="center"
+            android:src="@mipmap/settings"/>
+
+    </FrameLayout>
+
+</RelativeLayout>

@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.drivingassistant"
-        minSdkVersion 22
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -42,6 +42,9 @@ repositories {
     jcenter()
     maven {
         url "https://jitpack.io"
+    }
+    flatDir {
+        dirs 'libs'
     }
 }
 
@@ -109,4 +112,6 @@ dependencies {
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
     implementation 'com.github.javiersantos:MaterialStyledDialogs:2.2'
     implementation 'com.karumi:dexter:5.0.0'
+
+    implementation(name:'HERE-sdk', ext:'aar')
 }
