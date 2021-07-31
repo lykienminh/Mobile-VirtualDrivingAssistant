@@ -416,7 +416,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         currentPolyline = map.addPolyline((PolylineOptions) values[0]);
         LatLng center = new LatLng((place1.latitude + place2.latitude) / 2,
                 (place1.longitude + place2.longitude) / 2);
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(center, 8));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(center, 13));
     }
 
     // Google Places API

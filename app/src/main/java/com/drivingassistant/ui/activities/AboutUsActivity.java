@@ -25,27 +25,31 @@ public class AboutUsActivity extends AppCompatActivity {
 
         loadLocale();
         super.onCreate(savedInstanceState);
-        if(isFirstUse.equals("Not use")) {
-            SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-            editor.putString("firstUse", "Used");
-            editor.apply();
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("firstUse", "Used");
+        editor.apply();
 
-            setContentView(R.layout.activity_aboutus);
+        setContentView(R.layout.activity_aboutus);
 
-            Button changLang = findViewById(R.id.btn_changLang);
-            changLang.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-                    editor.putString("firstUse", "Not use");
-                    editor.apply();
-                    showChangeLanguageDialog();
-                }
-            });
-        }
-        else {
-            goHomepage();
-        }
+        Button changLang = findViewById(R.id.btn_changLang);
+        changLang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+                editor.putString("firstUse", "Not use");
+                editor.apply();
+                showChangeLanguageDialog();
+            }
+        });
+
+        Button getStarted = findViewById(R.id.btn_getStarted);
+        getStarted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutUsActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void goHomepage() {

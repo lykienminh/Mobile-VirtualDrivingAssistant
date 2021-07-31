@@ -168,8 +168,8 @@ public class LoginActivity extends FragmentActivity {
                             return;
                         }
                         String name = jsonResponse.getString("name");
-                        Toast.makeText(LoginActivity.this, R.string.str_login_hello + name + "!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, HistoryActivity.class);
+                        Toast.makeText(LoginActivity.this, "Hello "+ name + "!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     }
                 }));
