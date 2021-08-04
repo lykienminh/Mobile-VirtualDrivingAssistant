@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -17,11 +20,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:installLocation="preferExternal"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <receiver
-            android:name=".ui.retrofit.MyLocationService"/>
+
+
+        <receiver android:name=".ui.retrofit.MyLocationService" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -32,6 +37,16 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="com.here.android.maps.appid"
+            android:value="ycYGRlakbA9XnsF2S0bq" />
+        <meta-data
+            android:name="com.here.android.maps.apptoken"
+            android:value="jhDTNcl6_KaurD3bkuapUg" />
+        <meta-data
+            android:name="com.here.android.maps.license.key"
+            android:value="byMSdzn0T6tHRVzCWB4f6HKhD7So6JAFiYuDG7q0HX11ZcNADtc6RvI8SifgbHCYYBBw/VxHG2wW96zzPUJ7FnZBqoImkq1KpWVJuFaR/NqHewmRefWvvl1knQ5d+LI2hQAepQlCxAQk6bu2vF+cO5Du0P2NqgZZUrBSHm2F333EOkAiTs13LwwzSb5vGkS7ihiwAd+dcvL1/kHBTeWPntIr6N+PDmGYLV7ScPayRWbxn3u4xb7BWy+SlloXGO8wZSSVekhY0d6mfEp7mkOqUjeFbXWbWxpjNyq/kCzJB4E+gZshRrnZoDa8n44hIE5iGdnh5sczU4EZc/NId/fvQ8tmEVjLRFSeNT+J2aGdE93LVa6zKiN6rewJcMv0pSWmc4iH+IBd2HyPAeaH53LSC5LaGACZG1M9K0k098DV2/QW3SU6bNpuJKyPn5rc0ibWsQSmnrxpFYFrGsjjmRkAooOf0aJiiOMr2sfNF3OEVwHl0Tu9RzPoMKqRNZ6NVgiyZPgAeN0aHTiCniCqpMij+QkJRYb2M4vCQM/Ei9JTdFuLBUhX/vCnaKjwZnaRpKES8mWHded5f88yzOT8QBLI3VzVdBs3TfFDgtedZgSSNKARX3/pfBIEUHnCD96NH9iOztLYUxI8uqsl+4fJjDwdV8F4R+5mPY10LbBt1OrnUKs=" />
+
 
         <activity android:name=".ui.activities.AboutUsActivity">
             <intent-filter>
@@ -49,7 +64,8 @@
         <activity android:name=".ui.activities.DetectorActivity" />
         <activity android:name=".ui.activities.HistoryActivity" />
         <activity android:name=".ui.activities.HistoryLocationActivity" />
-        <activity android:name=".ui.activities.SettingsInfo"/>
+        <activity android:name=".ui.activities.SettingsInfo" />
+        <activity android:name=".ui.activities.TrafficDensity"></activity>
     </application>
 
 </manifest>
