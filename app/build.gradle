@@ -17,6 +17,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
     }
 
     buildTypes {
@@ -46,6 +49,25 @@ repositories {
     flatDir {
         dirs 'libs'
     }
+<<<<<<< HEAD
+=======
+//    maven {
+//        url 'https://api.mapbox.com/downloads/v2/releases/maven'
+//        authentication {
+//            basic(BasicAuthentication)
+//        }
+//        credentials {
+//            // Do not change the username below.
+//            // This should always be `mapbox` (not your username).
+//            username = 'mapbox'
+//            // Use the secret token you stored in gradle.properties as the password
+//            password = project.properties['MAPBOX_DOWNLOADS_TOKEN'] ?: ""
+//        }
+//    }
+
+    mavenCentral()
+    maven { url 'https://mapbox.bintray.com/mapbox' }
+>>>>>>> fe082ec4e8638ab884910552d512808d0441189d
 }
 
 dependencies {
@@ -114,4 +136,22 @@ dependencies {
     implementation 'com.karumi:dexter:5.0.0'
 
 //    implementation(name:'HERE-sdk', ext:'aar')
+<<<<<<< HEAD
+=======
+
+    // added
+//    implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:9.6.2'){
+//        exclude group: 'group_name', module: 'module_name'
+//        transitive=true
+//    }
+//    implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation-ui:0.42.6'
+
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:6.0.1'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.6.0'
+
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.13.0'
+    implementation('com.mapbox.mapboxsdk:mapbox-android-navigation-ui:0.13.0') {
+        transitive = true
+    }
+>>>>>>> fe082ec4e8638ab884910552d512808d0441189d
 }

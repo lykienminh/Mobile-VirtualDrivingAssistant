@@ -92,7 +92,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     SearchView searchView;
     Marker marker;
     FusedLocationProviderClient fusedLocationProviderClient;
-    ImageButton btn_traffic_mode, btn_gps, btn_direction;
+    ImageButton btn_traffic_mode, btn_gps, btn_direction, btn_to_traffic_density_mode;
     Button btn_restaurant;
     LatLng place1, place2;
     Polyline currentPolyline;
@@ -141,6 +141,15 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 Log.wtf("khang", url);
                 // Execute place task method to download json data
                 new PlaceTask().execute(url);
+            }
+        });
+        btn_to_traffic_density_mode = (ImageButton) findViewById(R.id.btn_to_traffic_density_mode);
+        btn_to_traffic_density_mode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.wtf("Hoang", "Clicked");
+                Intent intent = new Intent(MapActivity.this, TrafficDensity.class);
+                startActivity(intent);
             }
         });
 

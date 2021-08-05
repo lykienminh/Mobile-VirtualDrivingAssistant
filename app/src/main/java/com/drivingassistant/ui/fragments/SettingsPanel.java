@@ -26,7 +26,7 @@ public class SettingsPanel {
 
     private void initUIElements() {
         m_mapModeGroup = (RadioGroup) m_activity.findViewById(R.id.mapModeRadioGroup);
-
+        m_map.setMapScheme(Map.Scheme.NORMAL_DAY);
         setUIListeners();
     }
 

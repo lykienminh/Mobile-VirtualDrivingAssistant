@@ -19,4 +19,7 @@
     <color name="textPrimary">#212121</color>
     <color name="textSecondary">#757575</color>
     <color name="myTextColor">#AFAFAF</color>
+    <color name="mapboxBlue">#0000EE</color>
+
+
 </resources>

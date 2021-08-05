@@ -133,6 +133,14 @@
                 
 
                 <ImageButton
+                    android:id="@+id/btn_to_traffic_density_mode"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/btn_traffic_mode" />
+
+
+                <ImageButton
                     android:id="@+id/btn_traffic_mode"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
