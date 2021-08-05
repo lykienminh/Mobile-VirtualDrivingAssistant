@@ -22,7 +22,7 @@
     <string name="hotel_icon">Hotels</string>
     <string name="coffee_icon">Coffee</string>
     <string name="more_icon">More</string>
-    <string name="tfe_od_camera_error" translation_description="Error regarding camera support[CHAR_LIMIT=40]" translatable="false">This device doesn\'t support Camera2 API.</string>
+    <string name="tfe_od_camera_error" translatable="false" translation_description="Error regarding camera support[CHAR_LIMIT=40]">This device doesn\'t support Camera2 API.</string>
 
     <string name="current_distance">Current\ndistance</string>
     <string name="total_distance">Total\ndistance</string>
@@ -67,6 +67,6 @@
     <string name="str_register_warn_name">Name cannot be null or empty</string>
     <string name="str_register_warn_password">Password cannot be null or empty</string>
     <string name="str_login_hello">"Hello, "</string>
-    >>>>>>> 475aa80390e94c710f51d72cb6b1f8f89fc8e595
+    <string name="engine_init_error" translatable="false">Map engine initialization</string>
 
 </resources>

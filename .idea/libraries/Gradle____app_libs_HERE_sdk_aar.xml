@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: ./app/libs/HERE-sdk.aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4791b0b9a69d257b3bb5d7e8e5a13e10/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4791b0b9a69d257b3bb5d7e8e5a13e10/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4791b0b9a69d257b3bb5d7e8e5a13e10/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3274e99e774949ef23b87e8bd92b78f2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3274e99e774949ef23b87e8bd92b78f2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3274e99e774949ef23b87e8bd92b78f2/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
