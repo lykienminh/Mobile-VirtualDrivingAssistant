@@ -49,32 +49,15 @@ repositories {
     flatDir {
         dirs 'libs'
     }
-<<<<<<< HEAD
-=======
-//    maven {
-//        url 'https://api.mapbox.com/downloads/v2/releases/maven'
-//        authentication {
-//            basic(BasicAuthentication)
-//        }
-//        credentials {
-//            // Do not change the username below.
-//            // This should always be `mapbox` (not your username).
-//            username = 'mapbox'
-//            // Use the secret token you stored in gradle.properties as the password
-//            password = project.properties['MAPBOX_DOWNLOADS_TOKEN'] ?: ""
-//        }
-//    }
-
     mavenCentral()
     maven { url 'https://mapbox.bintray.com/mapbox' }
->>>>>>> fe082ec4e8638ab884910552d512808d0441189d
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
     implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation 'androidx.navigation:navigation-fragment:2.3.5'
     implementation 'androidx.navigation:navigation-ui:2.3.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -85,16 +68,16 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.0.0'
-    implementation 'com.google.android.material:material:1.3.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
+    implementation 'com.google.android.material:material:1.4.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
     implementation 'com.google.android.libraries.places:places:2.4.0'
     androidTestImplementation 'com.google.truth:truth:1.0.1'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test:rules:1.1.0'
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
 
     implementation 'in.unicodelabs.sorbh:kdgaugeview:1.0.0'
 
@@ -110,41 +93,30 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:19.0.0'
 
     // image loader
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    implementation 'com.github.bumptech.glide:annotations:4.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'com.github.bumptech.glide:annotations:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
     implementation 'com.google.code.gson:gson:2.8.6'
 
-    implementation 'org.tensorflow:tensorflow-lite:1.14.0'
+    implementation 'org.tensorflow:tensorflow-lite:2.4.0'
 
     // Map
-    implementation 'androidx.navigation:navigation-fragment:2.3.4'
-    implementation 'androidx.navigation:navigation-ui:2.3.4'
+    implementation 'androidx.navigation:navigation-fragment:2.3.5'
+    implementation 'androidx.navigation:navigation-ui:2.3.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     // Retrofit
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
 
     // RxJava
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
 
     // Material Edit Text
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
     implementation 'com.github.javiersantos:MaterialStyledDialogs:2.2'
     implementation 'com.karumi:dexter:5.0.0'
-
-//    implementation(name:'HERE-sdk', ext:'aar')
-<<<<<<< HEAD
-=======
-
-    // added
-//    implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:9.6.2'){
-//        exclude group: 'group_name', module: 'module_name'
-//        transitive=true
-//    }
-//    implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation-ui:0.42.6'
 
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:6.0.1'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.6.0'
@@ -153,5 +125,4 @@ dependencies {
     implementation('com.mapbox.mapboxsdk:mapbox-android-navigation-ui:0.13.0') {
         transitive = true
     }
->>>>>>> fe082ec4e8638ab884910552d512808d0441189d
 }

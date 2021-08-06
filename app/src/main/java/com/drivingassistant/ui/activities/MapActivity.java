@@ -373,7 +373,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             @Override
             public void run() {
                 Log.wtf("khang", "Send history.");
-                compositeDisposable.add(iMyService.sendHistory(speed, latitude, longitude, traffic_sign)
+                // Fetching the stored data
+                // from the SharedPreference
+                SharedPreferences sh = getSharedPreferences("USER", MODE_PRIVATE);
+
+                String user_id = sh.getString("id", "");
+                Log.wtf("user_id", user_id);
+                compositeDisposable.add(iMyService.sendHistory(user_id, speed, latitude, longitude, traffic_sign)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<String>() {

@@ -48,11 +48,11 @@
             android:value="byMSdzn0T6tHRVzCWB4f6HKhD7So6JAFiYuDG7q0HX11ZcNADtc6RvI8SifgbHCYYBBw/VxHG2wW96zzPUJ7FnZBqoImkq1KpWVJuFaR/NqHewmRefWvvl1knQ5d+LI2hQAepQlCxAQk6bu2vF+cO5Du0P2NqgZZUrBSHm2F333EOkAiTs13LwwzSb5vGkS7ihiwAd+dcvL1/kHBTeWPntIr6N+PDmGYLV7ScPayRWbxn3u4xb7BWy+SlloXGO8wZSSVekhY0d6mfEp7mkOqUjeFbXWbWxpjNyq/kCzJB4E+gZshRrnZoDa8n44hIE5iGdnh5sczU4EZc/NId/fvQ8tmEVjLRFSeNT+J2aGdE93LVa6zKiN6rewJcMv0pSWmc4iH+IBd2HyPAeaH53LSC5LaGACZG1M9K0k098DV2/QW3SU6bNpuJKyPn5rc0ibWsQSmnrxpFYFrGsjjmRkAooOf0aJiiOMr2sfNF3OEVwHl0Tu9RzPoMKqRNZ6NVgiyZPgAeN0aHTiCniCqpMij+QkJRYb2M4vCQM/Ei9JTdFuLBUhX/vCnaKjwZnaRpKES8mWHded5f88yzOT8QBLI3VzVdBs3TfFDgtedZgSSNKARX3/pfBIEUHnCD96NH9iOztLYUxI8uqsl+4fJjDwdV8F4R+5mPY10LbBt1OrnUKs=" />
 
         <activity android:name=".ui.activities.AboutUsActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ui.activities.LoginActivity" />
         <activity android:name=".ui.activities.MainActivity" />
@@ -66,11 +66,11 @@
         <activity android:name=".ui.activities.SettingsInfo" />
         <activity android:name=".ui.activities.TrafficDensity" />
         <activity android:name=".ui.activities.MapNavigation">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 

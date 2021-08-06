@@ -3,6 +3,7 @@ package com.drivingassistant.ui.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -76,9 +77,15 @@ public class HistoryLocationActivity extends AppCompatActivity {
         Log.wtf("khang", time_start);
         Log.wtf("khang", "Get history.");
 
+        // Fetching the stored data
+        // from the SharedPreference
+        SharedPreferences sh = getSharedPreferences("USER", MODE_PRIVATE);
+
+        String user_id = sh.getString("id", "");
+
         // Create JSON parser class
         JSONParserHistory jsonParserHistory = new JSONParserHistory();
-        compositeDisposable.add(iMyService.getHistory(time_start, time_end)
+        compositeDisposable.add(iMyService.getHistory(user_id, time_start, time_end)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Consumer<String>() {

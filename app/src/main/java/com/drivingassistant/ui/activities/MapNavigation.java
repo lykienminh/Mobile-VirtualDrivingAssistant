@@ -70,7 +70,7 @@ public class MapNavigation extends AppCompatActivity implements OnMapReadyCallba
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
-        navigationButton = findViewById(R.id.startButton);
+        navigationButton = (Button) findViewById(R.id.startButton);
         navigationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

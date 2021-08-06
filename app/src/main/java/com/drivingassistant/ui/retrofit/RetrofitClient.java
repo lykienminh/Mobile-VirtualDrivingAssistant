@@ -9,7 +9,7 @@ public class RetrofitClient {
     public static Retrofit getInstance(){
         if (instance == null){
             instance = new Retrofit.Builder()
-                    .baseUrl("https://kimeappserver.herokuapp.com/") // In emulator, localhost will change to 10.0.2.2
+                    .baseUrl("http://192.168.43.85:3000/") // In emulator, localhost will change to 10.0.2.2
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();

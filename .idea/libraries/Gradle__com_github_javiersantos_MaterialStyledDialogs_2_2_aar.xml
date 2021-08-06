@@ -1,9 +1,6 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.javiersantos:MaterialStyledDialogs:2.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/361c41509e6e95d9887542fe4b264e36/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/361c41509e6e95d9887542fe4b264e36/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/361c41509e6e95d9887542fe4b264e36/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dcd0236b3446da0ff6603eb403f61584/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dcd0236b3446da0ff6603eb403f61584/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dcd0236b3446da0ff6603eb403f61584/res" />
@@ -13,6 +10,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3c7f823c9e538a179d8341a81336ddb5/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3c7f823c9e538a179d8341a81336ddb5/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3c7f823c9e538a179d8341a81336ddb5/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/361c41509e6e95d9887542fe4b264e36/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/361c41509e6e95d9887542fe4b264e36/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/361c41509e6e95d9887542fe4b264e36/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

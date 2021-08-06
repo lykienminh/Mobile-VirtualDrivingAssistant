@@ -169,6 +169,22 @@ public class LoginActivity extends FragmentActivity {
                         }
                         String name = jsonResponse.getString("name");
                         Toast.makeText(LoginActivity.this, "Hello "+ name + "!", Toast.LENGTH_SHORT).show();
+
+                        String user_id = jsonResponse.getString("user_id");
+                        // Storing data into SharedPreferences
+                        SharedPreferences sharedPreferences = getSharedPreferences("USER",MODE_PRIVATE);
+
+                        // Creating an Editor object to edit(write to the file)
+                        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+                        // Storing the key and its value as the data fetched from edittext
+                        myEdit.putString("id", user_id);
+
+                        // Once the changes have been made,
+                        // we need to commit to apply those changes made,
+                        // otherwise, it will throw an error
+                        myEdit.apply();
+
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     }

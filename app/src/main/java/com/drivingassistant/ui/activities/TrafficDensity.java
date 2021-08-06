@@ -27,11 +27,7 @@ public class TrafficDensity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
-        setContentView(R.layout.activity_main);
-=======
         setContentView(R.layout.activity_traffic_density);
->>>>>>> fe082ec4e8638ab884910552d512808d0441189d
 
         if (hasPermissions(this, RUNTIME_PERMISSIONS)) {
             setupMapFragmentView();
