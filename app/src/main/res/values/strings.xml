@@ -70,7 +70,6 @@
     <string name="engine_init_error" translatable="false">Map engine initialization</string>
 
     // added
-    <string name="mapbox_access_token" translatable="false">pk.eyJ1IjoiaGNtdXQyMzJrIiwiYSI6ImNrcnk4c3FqeDA2OG4ydW9lMGI3bmk5M3gifQ.G2fAz-JC53S9Q09AegOPKA</string>
-    <string name="user_location_permission_explanation" translatable="false">This app needs location permissions to show its functionality.</string>
-    <string name="user_location_permission_not_granted" translatable="false">You didn\'t grant location permissions.</string>
+    <string name="start_navi" translatable="false">Start Navigation</string>
+    <string name="stop_navi" translatable="false">Stop Navigation</string>
 </resources>

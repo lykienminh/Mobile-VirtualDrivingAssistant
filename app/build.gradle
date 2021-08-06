@@ -62,9 +62,9 @@ repositories {
 //            password = project.properties['MAPBOX_DOWNLOADS_TOKEN'] ?: ""
 //        }
 //    }
-
-    mavenCentral()
-    maven { url 'https://mapbox.bintray.com/mapbox' }
+//
+//    mavenCentral()
+//    maven { url 'https://mapbox.bintray.com/mapbox' }
 }
 
 dependencies {
@@ -141,11 +141,13 @@ dependencies {
 //    }
 //    implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation-ui:0.42.6'
 
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:6.0.1'
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.6.0'
-
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.13.0'
-    implementation('com.mapbox.mapboxsdk:mapbox-android-navigation-ui:0.13.0') {
-        transitive = true
-    }
+//    implementation "com.mapbox.navigation:android:2.0.0-beta.21"
+//    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:6.0.1'
+//    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.6.0'
+//
+//    implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.13.0'
+//    implementation('com.mapbox.mapboxsdk:mapbox-android-navigation-ui:0.13.0') {
+//        transitive = true
+//    }
+//    implementation "com.mapbox.navigation:ui:1.5.1"
 }

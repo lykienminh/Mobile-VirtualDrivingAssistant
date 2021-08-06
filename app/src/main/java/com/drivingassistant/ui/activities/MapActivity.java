@@ -143,12 +143,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 new PlaceTask().execute(url);
             }
         });
-        btn_to_traffic_density_mode = (ImageButton) findViewById(R.id.btn_to_traffic_density_mode);
+        btn_to_traffic_density_mode = (ImageButton) findViewById(R.id.btn_to_test);
         btn_to_traffic_density_mode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.wtf("Hoang", "Clicked");
-                Intent intent = new Intent(MapActivity.this, TrafficDensity.class);
+                Intent intent = new Intent(MapActivity.this, NavigationHoang.class);
                 startActivity(intent);
             }
         });
