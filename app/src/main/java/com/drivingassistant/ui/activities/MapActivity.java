@@ -70,9 +70,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -141,15 +138,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 Log.wtf("khang", url);
                 // Execute place task method to download json data
                 new PlaceTask().execute(url);
-            }
-        });
-        btn_to_traffic_density_mode = (ImageButton) findViewById(R.id.btn_to_traffic_density_mode);
-        btn_to_traffic_density_mode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.wtf("Hoang", "Clicked");
-                Intent intent = new Intent(MapActivity.this, TrafficDensity.class);
-                startActivity(intent);
             }
         });
 
@@ -226,11 +214,19 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         btn_direction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Initialize url
-                String url = getUrl(place1, place2, "driving");
-                Log.wtf("khang", url);
-                // Execute place task method to download json data
-                new FetchURL(MapActivity.this).execute(url, "driving");
+//                // Initialize url
+//                String url = getUrl(place1, place2, "driving");
+//                Log.wtf("khang", url);
+//                // Execute place task method to download json data
+//                new FetchURL(MapActivity.this).execute(url, "driving");
+                Intent intent = new Intent(MapActivity.this, MapNavigation.class);
+
+                String src = place1.latitude + "," + place1.longitude;
+                String des = place2.latitude + "," + place2.longitude;
+                Log.wtf("navigation", src);
+                intent.putExtra("place1", src);
+                intent.putExtra("place2", des);
+                startActivity(intent);
             }
         });
 

@@ -54,4 +54,5 @@
     <string name="str_register_warn_name">Vui lòng nhập tên</string>
     <string name="str_register_warn_password">Vui lòng nhập mật khẩu</string>
     <string name="str_login_hello">"Xin chào, "</string>
+    <string name="return_map" translatable="false">Trở v</string>
 </resources>

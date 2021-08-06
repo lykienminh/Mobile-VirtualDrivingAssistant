@@ -130,14 +130,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.93">
-                
-
-                <ImageButton
-                    android:id="@+id/btn_to_traffic_density_mode"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/btn_traffic_mode" />
 
 
                 <ImageButton
@@ -156,6 +148,13 @@
 
                 <ImageButton
                     android:id="@+id/btn_direction"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/btn_go" />
+
+                <ImageButton
+                    android:id="@+id/btn_step"
+                    android:visibility="gone"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:background="@drawable/btn_go" />

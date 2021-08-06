@@ -1,272 +1,121 @@
 package com.drivingassistant.ui.activities;
 
-import android.annotation.SuppressLint;
-import android.location.Location;
+import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import com.drivingassistant.R;
-import com.mapbox.android.core.location.LocationEngine;
-import com.mapbox.android.core.location.LocationEngineListener;
-import com.mapbox.android.core.location.LocationEnginePriority;
-import com.mapbox.android.core.location.LocationEngineProvider;
-import com.mapbox.android.core.permissions.PermissionsListener;
-import com.mapbox.android.core.permissions.PermissionsManager;
-import com.mapbox.api.directions.v5.models.DirectionsResponse;
-import com.mapbox.api.directions.v5.models.DirectionsRoute;
-import com.mapbox.geojson.Point;
-import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.maps.MapView;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
-import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode;
-import com.mapbox.mapboxsdk.plugins.locationlayer.modes.RenderMode;
-import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher;
-import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions;
-import com.mapbox.services.android.navigation.ui.v5.NavigationViewOptions;
-import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute;
-import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute;
+import com.drivingassistant.ui.fragments.MapFragmentView;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+public class MapNavigation extends AppCompatActivity {
 
-public class MapNavigation extends AppCompatActivity implements OnMapReadyCallback, LocationEngineListener,
-        PermissionsListener, MapboxMap.OnMapClickListener {
-    private MapView mapView;
-    private MapboxMap mapboxMap;
+    private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
+    private static final String[] RUNTIME_PERMISSIONS = {
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.INTERNET,
+            Manifest.permission.ACCESS_WIFI_STATE,
+            Manifest.permission.ACCESS_NETWORK_STATE
+    };
+    private final ArrayList<Double> positions = new ArrayList<Double>();
 
-    // variables for adding location layer
-    private PermissionsManager permissionsManager;
-    private LocationEngine locationEngine;
-    private LocationLayerPlugin locationLayerPlugin;
-    private Location originLocation;
-    private Point originPosition, destinationPosition;
-    private Marker destinationMarker;
-    private Button navigationButton;
-
-    private NavigationMapRoute navigationMapRoute;
-    private static final String TAG = "MapNavigation";
-
+    private MapFragmentView m_mapFragmentView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
         setContentView(R.layout.activity_map_navigation);
-        mapView = findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(this);
 
-        navigationButton = (Button) findViewById(R.id.startButton);
-        navigationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (hasPermissions(this, RUNTIME_PERMISSIONS)) {
+            setupMapFragmentView();
+        } else {
+            ActivityCompat
+                    .requestPermissions(this, RUNTIME_PERMISSIONS, REQUEST_CODE_ASK_PERMISSIONS);
+        }
+    }
 
-                NavigationLauncherOptions options = NavigationLauncherOptions.builder()
-                        .origin(originPosition)
-                        .destination(destinationPosition)
-                        .shouldSimulateRoute(true)
-                        .build();
-                NavigationLauncher.startNavigation(MapNavigation.this, options);
+    /**
+     * Only when the app's target SDK is 23 or higher, it requests each dangerous permissions it
+     * needs when the app is running.
+     */
+    private static boolean hasPermissions(Context context, String... permissions) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
             }
-        });
+        }
+        return true;
     }
 
-    private void getRoute(Point origin, Point destination){
-        NavigationRoute.builder()
-                .accessToken(Mapbox.getAccessToken())
-                .origin(origin)
-                .destination(destination)
-                .build()
-                .getRoute(new Callback<DirectionsResponse>() {
-                    @Override
-                    public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
-                        if (response.body() == null){
-                            Log.e(TAG, "No route found, check your instruction");
-                            return;
-                        } else if (response.body().routes().size() == 0){
-                            Log.e(TAG, "No routes found");
-                            return;
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS: {
+                for (int index = 0; index < permissions.length; index++) {
+                    if (grantResults[index] != PackageManager.PERMISSION_GRANTED) {
+
+                        /*
+                         * If the user turned down the permission request in the past and chose the
+                         * Don't ask again option in the permission request system dialog.
+                         */
+                        if (!ActivityCompat
+                                .shouldShowRequestPermissionRationale(this, permissions[index])) {
+                            Toast.makeText(this, "Required permission " + permissions[index]
+                                            + " not granted. "
+                                            + "Please go to settings and turn on for sample app",
+                                    Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(this, "Required permission " + permissions[index]
+                                    + " not granted", Toast.LENGTH_LONG).show();
                         }
-
-                        DirectionsRoute currentRoute = response.body().routes().get(0);
-
-                        if (navigationMapRoute != null){
-                            navigationMapRoute.removeRoute();
-                        } else{
-                            navigationMapRoute = new NavigationMapRoute(null, mapView, mapboxMap);
-                        }
-                        navigationMapRoute.addRoute(currentRoute);
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<DirectionsResponse> call, Throwable t) {
-                        Log.e(TAG, "Error" + t.getMessage());
-                    }
-                });
-    }
-
-    @SuppressLint("MissingPermission")
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (locationEngine != null){
-            locationEngine.requestLocationUpdates();
+                setupMapFragmentView();
+                break;
+            }
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-        if (locationLayerPlugin != null){
-            locationLayerPlugin.onStart();
-        }
-        mapView.onStart();
+    }
+
+    private void setupMapFragmentView() {
+        Intent intent = this.getIntent();
+        String[] place1 = intent.getStringExtra("place1").split(",");
+        double lat1 = Double.parseDouble(place1[0]);
+        double lng1 = Double.parseDouble(place1[1]);
+        positions.add(lat1);
+        positions.add(lng1);
+        String[] place2 = intent.getStringExtra("place2").split(",");
+        double lat2 = Double.parseDouble(place2[0]);
+        double lng2 = Double.parseDouble(place2[1]);
+        positions.add(lat2);
+        positions.add(lng2);
+        Log.wtf("navigation", positions.toString());
+        // All permission requests are being handled. Create map fragment view. Please note
+        // the HERE Mobile SDK requires all permissions defined above to operate properly.
+        m_mapFragmentView = new MapFragmentView(this, positions);
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (locationEngine != null){
-            locationEngine.removeLocationUpdates();
-        }
-        if (locationLayerPlugin != null){
-            locationLayerPlugin.onStop();
-        }
-        mapView.onStop();
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
-    @Override
-    protected void onDestroy() {
+    public void onDestroy() {
+        m_mapFragmentView.onDestroy();
         super.onDestroy();
-        if (locationEngine != null){
-            locationEngine.deactivate();
-        }
-        mapView.onDestroy();
-    }
-
-    @SuppressLint("MissingPermission")
-    @Override
-    public void onConnected() {
-        locationEngine.requestLocationUpdates();
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        if (location != null){
-            originLocation = location;
-            setCameraPosition(location);
-        }
-    }
-
-    @Override
-    public void onExplanationNeeded(List<String> permissionsToExplain) {
-
-    }
-
-    @Override
-    public void onPermissionResult(boolean granted) {
-        if (granted){
-            enableLocation();
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    private void initializeLocationEngine(){
-        locationEngine = new LocationEngineProvider(this).obtainBestLocationEngineAvailable();
-        locationEngine.setPriority(LocationEnginePriority.HIGH_ACCURACY);
-        locationEngine.activate();
-
-        Location lastLocation = locationEngine.getLastLocation();
-        if (lastLocation != null){
-            originLocation = lastLocation;
-            setCameraPosition(lastLocation);
-        } else{
-            locationEngine.addLocationEngineListener(this);
-        }
-    }
-    @SuppressLint("MissingPermission")
-    private void initializeLocationLayer(){
-        locationLayerPlugin = new LocationLayerPlugin(mapView, mapboxMap, locationEngine);
-        locationLayerPlugin.setLocationLayerEnabled(true);
-        locationLayerPlugin.setCameraMode(CameraMode.TRACKING);
-        locationLayerPlugin.setRenderMode(RenderMode.NORMAL);
-    }
-
-    private void setCameraPosition(Location location){
-        mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
-    }
-
-    @SuppressLint("MissingSuperCall")
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    @Override
-    public void onMapReady(MapboxMap mapboxMap) {
-        this.mapboxMap = mapboxMap;
-        this.mapboxMap.addOnMapClickListener(this);
-        enableLocation();
-    }
-    private void enableLocation(){
-        if (PermissionsManager.areLocationPermissionsGranted(this)){
-            initializeLocationEngine();
-            initializeLocationLayer();
-        } else{
-            permissionsManager = new PermissionsManager(this);
-            permissionsManager.requestLocationPermissions(this);
-        }
-    }
-
-    @Override
-    public void onMapClick(@NonNull LatLng point) {
-        if (destinationMarker != null){
-            mapboxMap.removeMarker(destinationMarker);
-        }
-        destinationMarker = mapboxMap.addMarker(new MarkerOptions().position(point));
-        destinationPosition = Point.fromLngLat(point.getLongitude(), point.getLatitude());
-        originPosition = Point.fromLngLat(originLocation.getLongitude(), originLocation.getLatitude());
-
-        getRoute(originPosition, destinationPosition);
-        navigationButton.setEnabled(true);
-        navigationButton.setBackgroundResource(R.color.mapbox_blue);
     }
 }
-
-
-
-
-// Nothing to bere here
